@@ -89,5 +89,18 @@ namespace Intex_2017.Controllers
             }
             return View();
         }
+        [Authorize]
+        public ActionResult Logout()
+        {
+            if (User.Identity.IsAuthenticated == true)
+            {
+                FormsAuthentication.SignOut();
+                return RedirectToAction("CustomerLogin", "Login");
+            }
+            else
+            {
+                return RedirectToAction("CustomerLogin", "Login");
+            }
+        }
     }
 }

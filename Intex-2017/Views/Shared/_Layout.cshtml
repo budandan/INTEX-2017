@@ -39,7 +39,10 @@
                                 <li>@Html.ActionLink("Customer", "CustomerLogin", "Login")</li>
                                 <li>@Html.ActionLink("Employee", "EmployeeLogin", "Login")</li>
                         }
-
+                        else if (User.Identity.IsAuthenticated == true)
+                        {
+                            <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
+                        }
                     }
                 </ul>
             </div>
