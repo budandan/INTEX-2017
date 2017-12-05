@@ -22,8 +22,8 @@ namespace Intex_2017.Models
         public String EmpEmail { get; set; }
         public String EmpPhone { get; set; }
         public String EmpPassword { get; set; }
-        public String EmpUsername { get; set; }
         public String Role { get; set; }
         public decimal Wage { get; set; }
+        public String EmpUsername { get; set; }
     }
 }
