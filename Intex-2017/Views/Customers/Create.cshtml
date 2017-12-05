@@ -90,8 +90,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PaymentMethodID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PaymentMethodID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.PaymentMethodID, new SelectList(ViewBag.MyList, "PaymentMethodID", "PaymentMethodName"), new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PaymentMethodID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustUserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CustPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustPassword, "", new { @class = "text-danger" })
             </div>
         </div>
 

@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Customer Table</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,37 +12,40 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CustFirstName)
+            First Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustLastName)
+            Last Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustAddress1)
+            Address
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustAddress2)
+            Address 2
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustCity)
+            City
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustState)
+            State
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustZip)
+            Zip
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustEmail)
+            Email
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustPhone)
+            Phone
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PaymentMethodID)
+            PaymentMethod ID
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustPassword)
+            User Name
+        </th>
+        <th>
+            Password
         </th>
         <th></th>
     </tr>
@@ -78,6 +81,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PaymentMethodID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustUserName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CustPassword)

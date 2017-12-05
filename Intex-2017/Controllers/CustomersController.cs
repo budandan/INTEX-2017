@@ -39,16 +39,32 @@ namespace Intex_2017.Controllers
         // GET: Customers/Create
         public ActionResult Create()
         {
+			List<PaymentMethod> customer_Payments = new List<PaymentMethod>();
+			customer_Payments = db.PaymentMethods.ToList();
+			ViewBag.MyList = customer_Payments.ToList();
             return View();
         }
 
-        // POST: Customers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+
+		// POST: Customers/Create
+		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+		// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustID,CustFirstName,CustLastName,CustAddress1,CustAddress2,CustCity,CustState,CustZip,CustEmail,CustPhone,PaymentMethodID,CustPassword")] Customer customer)
+        public ActionResult Create([Bind(Include = "CustID,CustFirstName,CustLastName,CustAddress1,CustAddress2,CustCity,CustState,CustZip,CustEmail,CustPhone,PaymentMethodID,CustUserName,CustPassword")] Customer customer)
         {
+			List<Customer> checkList = new List<Customer>();
+			checkList = db.Customers.ToList();
+			for (int i = 0; i < checkList.Count; i++)
+			{
+				if (customer.CustUserName == checkList[i].CustUserName)
+				{
+					List<PaymentMethod> customer_Payments = new List<PaymentMethod>();
+					customer_Payments = db.PaymentMethods.ToList();
+					ViewBag.MyList = customer_Payments.ToList();
+					return View(customer);
+				}
+			}
             if (ModelState.IsValid)
             {
                 db.Customers.Add(customer);
