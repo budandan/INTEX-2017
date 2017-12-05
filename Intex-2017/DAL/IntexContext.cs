@@ -10,7 +10,7 @@ namespace Intex_2017.DAL
     public class IntexContext: DbContext
     {
         public IntexContext() : base("IntexContext") { }
-
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }

@@ -23,5 +23,6 @@ namespace Intex_2017.Models
         public String CustPhone { get; set; }
         public int PaymentMethodID { get; set; }
         public String CustPassword { get; set; }
+        public String CustUsername { get; set; }
     }
 }
