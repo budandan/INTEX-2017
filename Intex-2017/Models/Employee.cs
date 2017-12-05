@@ -6,13 +6,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-
 namespace Intex_2017.Models
 {
     [Table("Employee")]
     public class Employee
     {
         [Key]
+
         [DisplayName("Employee ID")]
         public int EmployeeID { get; set; }
 

@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "EmployeeLogin";
+}
+
+
+<br />
+<br />
+
+<div class="row text-center"><h2>Employee Portal</h2></div>
+
+<br />
+<br />
+<div class="text-center">
+
+    @using (Html.BeginForm("EmployeeLogin", "Login", FormMethod.Post))
+    {
+    <div class="row"><span class="text-danger text-center">@ViewBag.Message</span></div>
+        <br />
+        <div class="row">
+            <label for="inputEmail">Username:</label>
+            @Html.TextBox("userName")
+        </div>
+        <br />
+        <div class="row">
+            <label for="inputPassword">Password : </label>
+            @Html.Password("Password")
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-3">
+                <button type="submit">Login</button>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+    }
+</div>
