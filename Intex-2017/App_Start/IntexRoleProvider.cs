@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using Intex_2017.Models;
+using Intex_2017.Models.ViewModels;
 using Intex_2017.DAL;
 
 namespace Intex_2017.App_Start
@@ -50,36 +51,30 @@ namespace Intex_2017.App_Start
         public override string[] GetRolesForUser(string username)
         {
             string[] role = new string[] { };
-            Customer customer = db.Customers.Find(username);
-            if (customer != null)
+            var employeeRole = db.Database.SqlQuery<EmployeeRole>(
+                "SELECT Role FROM Employee WHERE EmpUsername = \'" + username + "\'"
+                ).FirstOrDefault();
+            if (employeeRole != null)
             {
-                return role;
-            }
-            else
-            {
-                Employee employee = db.Employees.Find(username);
-                if (employee != null)
+                if (employeeRole.Role == "SysAdmin")
                 {
-                    if (employee.Role == "SysAdmin")
-                    {
-                        return new string[] { "SysAdmin" };
-                    }
-                    else if (employee.Role == "LabTech")
-                    {
-                        return new string[] { "LabTech" };
-                    }
-                    else if (employee.Role == "SalesAgent")
-                    {
-                        return new string[] { "SalesAgent" };
-                    }
-                    else if (employee.Role == "Billing")
-                    {
-                        return new string[] { "Billing" };
-                    }
-                    else if (employee.Role == "Reports")
-                    {
-                        return new string[] { "Reports" }; 
-                    }
+                    return new string[] { "SysAdmin" };
+                }
+                else if (employeeRole.Role == "LabTech")
+                {
+                    return new string[] { "LabTech" };
+                }
+                else if (employeeRole.Role == "SalesAgent")
+                {
+                    return new string[] { "SalesAgent" };
+                }
+                else if (employeeRole.Role == "Billing")
+                {
+                    return new string[] { "Billing" };
+                }
+                else if (employeeRole.Role == "Reports")
+                {
+                    return new string[] { "Reports" }; 
                 }
             }
             return role;
