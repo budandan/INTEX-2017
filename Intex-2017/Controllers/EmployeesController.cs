@@ -11,6 +11,7 @@ using Intex_2017.Models;
 
 namespace Intex_2017.Controllers
 {
+    [Authorize(Roles = "SysAdmin")]
     public class EmployeesController : Controller
     {
         private IntexContext db = new IntexContext();

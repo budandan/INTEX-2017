@@ -12,7 +12,6 @@ namespace Intex_2017.Models
     public class Employee
     {
         [Key]
-
         [DisplayName("Employee ID")]
         public int EmployeeID { get; set; }
 

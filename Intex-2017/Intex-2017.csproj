@@ -149,6 +149,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IntexRoleProvider.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -213,6 +214,9 @@
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Login\CustomerLogin.cshtml" />
     <Content Include="Views\Login\EmployeeLogin.cshtml" />
+    <Content Include="Views\Login\Unauthorized.cshtml" />
+    <Content Include="Views\Login\Home.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

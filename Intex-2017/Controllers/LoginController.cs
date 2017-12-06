@@ -35,7 +35,8 @@ namespace Intex_2017.Controllers
                     if (c.CustPassword == password)
                     {
                         FormsAuthentication.SetAuthCookie(userName, rememberMe);
-
+                        Response.Cookies["firstname"].Value = c.CustFirstName;
+                        Response.Cookies["lastname"].Value = c.CustLastName;
                         return RedirectToAction("Index", "Home");
                     }
                     else
@@ -73,7 +74,8 @@ namespace Intex_2017.Controllers
                     if (e.EmpPassword == password)
                     {
                         FormsAuthentication.SetAuthCookie(userName, rememberMe);
-
+                        Response.Cookies["firstname"].Value = e.EmpFirstName;
+                        Response.Cookies["lastname"].Value = e.EmpLastName;
                         return RedirectToAction("Index", "Home");
                     }
                     else
@@ -89,17 +91,28 @@ namespace Intex_2017.Controllers
             }
             return View();
         }
+
+        public ActionResult Unauthorized()
+        {
+            return View();
+        }
+
+        public ActionResult Home()
+        {
+            return View();
+        }
+
         [Authorize]
         public ActionResult Logout()
         {
             if (User.Identity.IsAuthenticated == true)
             {
                 FormsAuthentication.SignOut();
-                return RedirectToAction("CustomerLogin", "Login");
+                return RedirectToAction("Home", "Login");
             }
             else
             {
-                return RedirectToAction("CustomerLogin", "Login");
+                return RedirectToAction("Home", "Login");
             }
         }
     }

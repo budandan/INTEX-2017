@@ -6,6 +6,8 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="https://bootswatch.com/3/readable/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -16,7 +18,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Northwest Labs", "Home", "Login", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -36,16 +38,25 @@
                     @{
                         if (User.IsInRole("SysAdmin"))
                         {
-                            <li>@Html.ActionLink("Admin", "CustomerLogin", "Login")</li>
+                            <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
                         }
                         if (User.Identity.IsAuthenticated == false)
                         {
-                                <li>@Html.ActionLink("Customer", "CustomerLogin", "Login")</li>
-                                <li>@Html.ActionLink("Employee", "EmployeeLogin", "Login")</li>
+                                <li>@Html.ActionLink("Customer Portal", "CustomerLogin", "Login")</li>
+                                <li>@Html.ActionLink("Employee Login", "EmployeeLogin", "Login")</li>
                         }
                         else if (User.Identity.IsAuthenticated == true)
                         {
-                            <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    @Request.Cookies["firstname"].Value @Request.Cookies["lastname"].Value
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("My Profile", "Logout", "Login")</li>
+                                    <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
+                                </ul>
+                            </li>
                         }
                     }
                 </ul>
@@ -56,7 +67,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Northwest Labs</p>
         </footer>
     </div>
 
