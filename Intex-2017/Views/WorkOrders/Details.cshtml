@@ -1,0 +1,106 @@
+﻿@model Intex_2017.Models.WorkOrder
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WorkOrder</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateArrived)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateArrived)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClientQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceivedByWho)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceivedByWho)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateDue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateDue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesAgentID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalesAgentID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsConfirmed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsConfirmed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsVerified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsVerified)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WorkOrderID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

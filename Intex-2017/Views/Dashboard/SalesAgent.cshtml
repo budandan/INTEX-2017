@@ -10,18 +10,42 @@
 <div class="row animated fadeIn">
     <h2>My Dashboard</h2>
 </div>
-
-<div class="row animated fadeIn" id="openCallTickets">
-    <div class="row text-center">
-        <h3 class="text-center">
-            There are
-        </h3>
-        <h1 class="text-danger">@ViewBag.NoOfOpenTickets</h1>
-        <h3 class="text-center">
-            open ticket(s).
-        </h3>
-        @Html.ActionLink("See Open Tickets", "Index", "CallTickets", null, new { @class = "btn btn-primary"})
+<br />
+<div class="row">
+    <div class="col-md-4 col-md-offset-2 text-center animated fadeInUp">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Open Call Tickets</h3>
+            </div>
+            <div class="panel-body">
+                <h3 class="text-center">
+                    There are
+                </h3>
+                <h1 class="text-danger">@ViewBag.NoOfOpenTickets</h1>
+                <h3 class="text-center">
+                    open ticket(s).
+                </h3>
+                @Html.ActionLink("See Open Tickets", "Index", "CallTickets", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 text-center animated fadeInUp">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Create Work Order</h3>
+            </div>
+            <div class="panel-body">
+                <h3 class="text-center">
+                    Create a work order without a call ticket here.
+                </h3>
+                <br />
+                <br />
+                <br />
+                @Html.ActionLink("Create Work Order", "SetCompound", "WorkOrders", new { SalesAgentName = User.Identity.Name }, new { @class = "btn btn-success" })
+            </div>
+        </div>
     </div>
 </div>
+
 
 

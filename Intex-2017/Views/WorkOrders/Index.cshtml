@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Intex_2017.Models.WorkOrder>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateArrived)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceivedByWho)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateDue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalesAgentID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActualQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsConfirmed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsVerified)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateArrived)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReceivedByWho)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateDue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalesAgentID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActualQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsConfirmed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsVerified)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.WorkOrderID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.WorkOrderID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.WorkOrderID })
+        </td>
+    </tr>
+}
+
+</table>

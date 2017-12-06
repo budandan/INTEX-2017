@@ -31,7 +31,7 @@
 </div>
 <div class="row">
     <div class="col-md-2 col-md-offset-3">
-        @Html.ActionLink("Create Work Order", "Create", "WorkOrders", new { id = ViewBag.CustID }, new { @class = "btn btn-success" })
+        @Html.ActionLink("Create Work Order", "SetCompound", "WorkOrders", new { CustID = (int)ViewBag.CustID, SalesAgentName = User.Identity.Name }, new { @class = "btn btn-success" })
         <br />
         <br />
         @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-sm btn-default" })
