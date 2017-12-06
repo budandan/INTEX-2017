@@ -4,26 +4,24 @@
 
 <div class="jumbotron animated fadeInDown">
     <h1>Northwest Labs</h1>
-    <p class="lead">Northwest Labs is a biotechnology company committed to accurate and speedy results</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h2 class="lead">Northwest Labs is a biotechnology company committed to accurate and speedy results.</h2>
+    <br />
+    <br />
+    <p>Need to make an order or have any questions?</p>
+    @Html.ActionLink("Contact Us", "Create", "CallTickets", null, new { @class = "btn btn-primary"})
 </div>
 
 <div class="row">
-    <div class="col-md-4 animated fadeInLeft">
+    <div class="col-md-6 animated fadeInLeft">
         <h2>Assay Catalog</h2>
         <p>
             We have a large selection of sensitive assays that can detect even the smallest concentrations.
         </p>
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
-    <div class="col-md-4 animated fadeInUp">
+    <div class="col-md-6 animated fadeInRight">
         <h2>About Us</h2>
         <p>Learn more about us here!</p>
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4 animated fadeInRight">
-        <h2>Contact</h2>
-        <p>Need to make an order? Speak to our in-house sales representatives instantly!</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>

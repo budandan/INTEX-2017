@@ -53,13 +53,13 @@ namespace Intex_2017.Controllers
 		// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustID,CustFirstName,CustLastName,CustAddress1,CustAddress2,CustCity,CustState,CustZip,CustEmail,CustPhone,PaymentMethodID,CustUserName,CustPassword")] Customer customer)
+        public ActionResult Create([Bind(Include = "CustID,CustFirstName,CustLastName,CustAddress1,CustAddress2,CustCity,CustState,CustZip,CustEmail,CustPhone,PaymentMethodID,CustUsername,CustPassword,CustCompany")] Customer customer)
         {
 			List<Customer> checkList = new List<Customer>();
 			checkList = db.Customers.ToList();
 			for (int i = 0; i < checkList.Count; i++)
 			{
-				if (customer.CustUserName == checkList[i].CustUserName)
+				if (customer.CustUsername == checkList[i].CustUsername)
 				{
 					List<PaymentMethod> customer_Payments = new List<PaymentMethod>();
 					customer_Payments = db.PaymentMethods.ToList();
