@@ -42,10 +42,13 @@
             PaymentMethod ID
         </th>
         <th>
-            User Name
+            Username
         </th>
         <th>
             Password
+        </th>
+        <th>
+            Company
         </th>
         <th></th>
     </tr>
@@ -83,10 +86,13 @@
             @Html.DisplayFor(modelItem => item.PaymentMethodID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CustUserName)
+            @Html.DisplayFor(modelItem => item.CustUsername)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CustPassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustCompany)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CustID }) |

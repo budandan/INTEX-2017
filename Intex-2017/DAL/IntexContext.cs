@@ -13,5 +13,7 @@ namespace Intex_2017.DAL
         public DbSet<Customer> Customers { get; set; }
 		    public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Employee> Employees { get; set; }
+
+        public System.Data.Entity.DbSet<Intex_2017.Models.CallTicket> CallTickets { get; set; }
     }
 }
