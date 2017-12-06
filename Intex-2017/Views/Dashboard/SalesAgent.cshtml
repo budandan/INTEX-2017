@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "SalesAgent";
+}
+
+<div class="row animated fadeInDown">
+    <h1>Welcome, @Request.Cookies["firstname"].Value @Request.Cookies["lastname"].Value.</h1>
+</div>
+
+<div class="row animated fadeIn">
+    <h2>My Dashboard</h2>
+</div>
+
+<div class="row animated fadeIn" id="openCallTickets">
+    <div class="row text-center">
+        <h3 class="text-center">
+            There are
+        </h3>
+        <h1 class="text-danger">@ViewBag.NoOfOpenTickets</h1>
+        <h3 class="text-center">
+            open ticket(s).
+        </h3>
+        @Html.ActionLink("See Open Tickets", "Index", "CallTickets", null, new { @class = "btn btn-primary"})
+    </div>
+</div>
+
+

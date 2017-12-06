@@ -28,19 +28,26 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @{
-                    if (User.Identity.IsAuthenticated == true)
-                    {
-                        <li>@Html.ActionLink("My Dashboard", "Index", "Home")</li>
-                    }
+                        if (User.Identity.IsAuthenticated == true)
+                        {
+                            if (User.IsInRole("Customer"))
+                            {
+                                <li>@Html.ActionLink("My Dashboard", "Customer", "Dashboard")</li>
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("My Dashboard", "Index", "Dashboard")</li>
+                            }
+                        }
 
                     }
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @{
-                        if (User.IsInRole("SysAdmin"))
+                        if (User.IsInRole("SysAdmin") || User.IsInRole("SalesAgent"))
                         {
-                            <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+                            <li>@Html.ActionLink("Control Panel", "Index", "ControlPanels")</li>
                         }
                         if (User.Identity.IsAuthenticated == false)
                         {

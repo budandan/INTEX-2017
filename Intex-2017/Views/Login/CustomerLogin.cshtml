@@ -16,7 +16,7 @@
 
         @using (Html.BeginForm("CustomerLogin", "Login", FormMethod.Post))
         {
-            <div class="row"><span class="text-danger text-center">@ViewBag.Message</span></div>
+            <div class="row"><span class="text-danger text-center">@ViewBag.Message</span><span class="text-success text-center">@ViewBag.createSuccess</span></div>
             <br />
             <div class="row">
                 <label for="inputEmail">Username:</label>

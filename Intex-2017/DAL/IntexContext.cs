@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using Intex_2017.Models;
+using System.Data.SqlClient;
 
 namespace Intex_2017.DAL
 {
@@ -11,9 +12,11 @@ namespace Intex_2017.DAL
     {
         public IntexContext() : base("IntexContext") { }
         public DbSet<Customer> Customers { get; set; }
-		    public DbSet<PaymentMethod> PaymentMethods { get; set; }
+		public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<CallTicket> CallTickets { get; set; }
 
-        public System.Data.Entity.DbSet<Intex_2017.Models.CallTicket> CallTickets { get; set; }
+        public SqlConnection con = new SqlConnection("Data Source=DESKTOP-89404G6\\SQLEXPRESS;Initial Catalog=Intex;Integrated Security=True");
     }
+
 }

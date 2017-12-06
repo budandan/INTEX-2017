@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Intex_2017.Models.CallTicket>
+﻿@model List<Intex_2017.Models.ViewModels.OpenTicketsViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -12,16 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CustID)
+            Customer Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Subject)
+            Company
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Body)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsOpen)
+            Subject
         </th>
         <th></th>
     </tr>
@@ -29,21 +26,17 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CustID)
+            @item.CustFirstName @item.CustLastName
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Subject)
+            @item.CustCompany
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Body)
+            @item.Subject
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IsOpen)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CallTicketID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CallTicketID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CallTicketID })
+            @Html.ActionLink("See Ticket", "Details", new { id=item.CallTicketID }, new { @class = "btn btn-primary"})
+            @Html.ActionLink("Close", "Delete", new { id=item.CallTicketID }, new { @class = "btn btn-danger"})
         </td>
     </tr>
 }

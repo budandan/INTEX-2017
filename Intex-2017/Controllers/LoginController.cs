@@ -13,8 +13,9 @@ namespace Intex_2017.Controllers
     {
         private IntexContext db = new IntexContext();
         //Get
-        public ActionResult CustomerLogin()
+        public ActionResult CustomerLogin(string message)
         {
+            ViewBag.createSuccess = message;
             return View();
         }
        
@@ -34,10 +35,10 @@ namespace Intex_2017.Controllers
                 {
                     if (c.CustPassword == password)
                     {
-                        FormsAuthentication.SetAuthCookie(userName, rememberMe);
+                        FormsAuthentication.SetAuthCookie(c.CustID.ToString(), rememberMe);
                         Response.Cookies["firstname"].Value = c.CustFirstName;
                         Response.Cookies["lastname"].Value = c.CustLastName;
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Customer", "Dashboard");
                     }
                     else
                     {
@@ -76,7 +77,7 @@ namespace Intex_2017.Controllers
                         FormsAuthentication.SetAuthCookie(userName, rememberMe);
                         Response.Cookies["firstname"].Value = e.EmpFirstName;
                         Response.Cookies["lastname"].Value = e.EmpLastName;
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Dashboard");
                     }
                     else
                     {
@@ -98,6 +99,11 @@ namespace Intex_2017.Controllers
         }
 
         public ActionResult Home()
+        {
+            return View();
+        }
+        
+        public ActionResult Contact()
         {
             return View();
         }
