@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "SetCompound";
+}
+
+<h2>New Work Order</h2>
+<br />
+<div class="row">
+    <div class="col-md-3 col-md-offset-2">
+        <h4>Select Compound</h4>
+        @using (Html.BeginForm("SelectAssays", "WorkOrders", FormMethod.Post))
+        {
+            @Html.DropDownList("LTNumber", new SelectList(ViewBag.compoundList, "LTNumber", "CompoundName"), new { @class = "form-control" })
+            @Html.TextBox("CustID", (String)ViewBag.CustID, new { @style = "visibility:hidden" })
+            @Html.TextBox("SalesAgentName", (String)ViewBag.SalesAgentName, new { @style = "visibility:hidden" })
+            <button class="btn btn-success" type="submit">Select Assays</button>
+        }
+    </div>
+</div>
