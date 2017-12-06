@@ -71,7 +71,15 @@ namespace Intex_2017.Controllers
             {
                 db.Customers.Add(customer);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                if (User.IsInRole("SysAdmin") || (User.IsInRole("SalesAgent")))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    var createSuccess = "Your account has been successfully created!";
+                    return RedirectToAction("CustomerLogin", "Login", new { message = createSuccess });
+                }
             }
 
             return View(customer);

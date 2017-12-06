@@ -149,9 +149,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IntexRoleProvider.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CallTicketsController.cs" />
+    <Compile Include="Controllers\ControlPanelsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Models\PaymentMethod.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\ViewModels\EmployeeRole.cs" />
+    <Compile Include="Models\ViewModels\OpenTicketsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -227,6 +229,15 @@
     <Content Include="Views\CallTickets\Details.cshtml" />
     <Content Include="Views\CallTickets\Edit.cshtml" />
     <Content Include="Views\CallTickets\Index.cshtml" />
+    <Content Include="Views\Login\Contact.cshtml" />
+    <Content Include="Views\Dashboard\SysAdmin.cshtml" />
+    <Content Include="Views\Dashboard\Billing.cshtml" />
+    <Content Include="Views\Dashboard\SalesAgent.cshtml" />
+    <Content Include="Views\Dashboard\LabTech.cshtml" />
+    <Content Include="Views\Dashboard\Customer.cshtml" />
+    <Content Include="Views\CallTickets\CustomerConfirmTicket.cshtml" />
+    <Content Include="Views\ControlPanels\SysAdmin.cshtml" />
+    <Content Include="Views\ControlPanels\SalesAgent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

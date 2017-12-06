@@ -8,20 +8,49 @@ using System.Web;
 using System.Web.Mvc;
 using Intex_2017.DAL;
 using Intex_2017.Models;
+using Intex_2017.Models.ViewModels;
 
 namespace Intex_2017.Controllers
 {
+    [Authorize]
     public class CallTicketsController : Controller
     {
         private IntexContext db = new IntexContext();
 
         // GET: CallTickets
+        [Authorize(Roles = "SalesAgent, SysAdmin")]
         public ActionResult Index()
         {
-            return View(db.CallTickets.ToList());
+            List<OpenTicketsViewModel> viewModelList = new List<OpenTicketsViewModel>();
+            List<Customer> customerList = new List<Customer>();
+            List<CallTicket> callTicketList = new List<CallTicket>();
+
+            customerList = db.Customers.ToList();
+            callTicketList = db.CallTickets.ToList();
+
+            foreach (CallTicket ct in callTicketList)
+            {
+                OpenTicketsViewModel viewModel = new OpenTicketsViewModel();
+                Customer c = new Customer();
+                c = db.Customers.Find(ct.CustID);
+                viewModel.CustFirstName = c.CustFirstName;
+                viewModel.CustLastName = c.CustLastName;
+                viewModel.CustCompany = c.CustCompany;
+                viewModel.Subject = ct.Subject;
+                viewModel.CallTicketID = ct.CallTicketID;
+                viewModelList.Add(viewModel);
+            }
+
+            return View(viewModelList);
+        }
+
+        public ActionResult CustomerConfirmTicket()
+        {
+            return View();
         }
 
         // GET: CallTickets/Details/5
+        [Authorize(Roles = "SalesAgent, SysAdmin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,8 +66,18 @@ namespace Intex_2017.Controllers
         }
 
         // GET: CallTickets/Create
-        public ActionResult Create()
+        [Authorize(Roles = "SalesAgent, SysAdmin, Customer")]
+        public ActionResult Create(int? id)
         {
+            var subjectOptions = new Dictionary<String, String>
+            {
+                { "Price Quote", "Price Quote" },
+                { "Question", "Question" },
+                { "Complaint", "Complaint" },
+                { "Other", "Other" },
+            };
+            ViewBag.subjectOptions = new SelectList(subjectOptions, "Key", "Value");
+            ViewBag.custID = id;
             return View();
         }
 
@@ -51,15 +90,34 @@ namespace Intex_2017.Controllers
         {
             if (ModelState.IsValid)
             {
+                callTicket.CustID = Int32.Parse(User.Identity.Name);
+                callTicket.IsOpen = true;
                 db.CallTickets.Add(callTicket);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                if (User.IsInRole("Customer"))
+                {
+                    return RedirectToAction("CustomerConfirmTicket");
+                }
+                else if (User.IsInRole("SalesAgent") || User.IsInRole("SysAdmin"))
+                {
+                    return RedirectToAction("Index");
+                }
             }
+
+            var subjectOptions = new Dictionary<String, String>
+            {
+                { "Price Quote", "Price Quote" },
+                { "Question", "Question" },
+                { "Complaint", "Complaint" },
+                { "Other", "Other" },
+            };
+            ViewBag.subjectOptions = new SelectList(subjectOptions, "Key", "Value");
 
             return View(callTicket);
         }
 
         // GET: CallTickets/Edit/5
+        [Authorize(Roles = "SalesAgent, SysAdmin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -91,6 +149,7 @@ namespace Intex_2017.Controllers
         }
 
         // GET: CallTickets/Delete/5
+        [Authorize(Roles = "SalesAgent, SysAdmin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

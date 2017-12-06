@@ -12,9 +12,15 @@ namespace Intex_2017.Models
     {
         [Key]
         public int CallTicketID { get; set; }
+
         public int CustID { get; set; }
+
         public String Subject { get; set; }
+
+        [Required]
+        [DataType(DataType.MultilineText)]
         public String Body { get; set; }
+
         public bool IsOpen { get; set; }
     }
 }
