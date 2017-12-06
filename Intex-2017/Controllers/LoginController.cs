@@ -30,7 +30,7 @@ namespace Intex_2017.Controllers
 
             foreach (Customer c in customerList)
             {
-                if (c.CustUsername == userName)
+                if (c.CustUserName == userName)
                 {
                     if (c.CustPassword == password)
                     {

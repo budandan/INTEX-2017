@@ -54,6 +54,7 @@ namespace Intex_2017.App_Start
             var employeeRole = db.Database.SqlQuery<EmployeeRole>(
                 "SELECT Role FROM Employee WHERE EmpUsername = \'" + username + "\'"
                 ).FirstOrDefault();
+
             if (employeeRole != null)
             {
                 if (employeeRole.Role == "SysAdmin")
@@ -77,7 +78,7 @@ namespace Intex_2017.App_Start
                     return new string[] { "Reports" }; 
                 }
             }
-            return role;
+            return new string[] { "Customer" };
         }
 
         public override string[] GetUsersInRole(string roleName)

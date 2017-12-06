@@ -16,12 +16,14 @@ namespace Intex_2017.Controllers
         private IntexContext db = new IntexContext();
 
         // GET: Customers
+        [Authorize(Roles = "SysAdmin, SalesAgent")]
         public ActionResult Index()
         {
             return View(db.Customers.ToList());
         }
 
         // GET: Customers/Details/5
+        [Authorize(Roles = "SysAdmin, SalesAgent, Customer")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -76,6 +78,7 @@ namespace Intex_2017.Controllers
         }
 
         // GET: Customers/Edit/5
+        [Authorize(Roles = "SysAdmin, SalesAgent, Customer")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -107,6 +110,7 @@ namespace Intex_2017.Controllers
         }
 
         // GET: Customers/Delete/5
+        [Authorize(Roles = "SysAdmin, SalesAgent")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

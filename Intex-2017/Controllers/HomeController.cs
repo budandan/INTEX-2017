@@ -19,7 +19,6 @@ namespace Intex_2017.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
             return View();
         }
 

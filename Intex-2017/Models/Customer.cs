@@ -55,7 +55,7 @@ namespace Intex_2017.Models
 	    	public String CustPhone { get; set; }
 
     		[Required]
-    		[DisplayName("Payment Method")]
+    		[DisplayName("Preferred Payment Method")]
 	    	public int PaymentMethodID { get; set; }
 
 	    	[Required]
