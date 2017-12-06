@@ -1,0 +1,22 @@
+﻿@model Intex_2017.Models.ViewModels.PriceQuoteViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Price Quote</h2>
+
+Assays
+@foreach (var sampleTest in Model.AssayCompoundList)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => sampleTest.AssayID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => sampleTest.LTNumber)
+        </td>
+    </tr>
+}
+
+
+

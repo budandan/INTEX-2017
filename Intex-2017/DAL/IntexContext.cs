@@ -15,8 +15,10 @@ namespace Intex_2017.DAL
 		public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<CallTicket> CallTickets { get; set; }
+        public DbSet<SampleTest> SampleTests { get; set; }
 
-        public SqlConnection con = new SqlConnection("Data Source=DESKTOP-89404G6\\SQLEXPRESS;Initial Catalog=Intex;Integrated Security=True");
+
+        public SqlConnection con = new SqlConnection("Data Source=CONNOR-RAZER-BL\\SQLEXPRESS;Initial Catalog=Intex;Integrated Security=True");
     }
 
 }
