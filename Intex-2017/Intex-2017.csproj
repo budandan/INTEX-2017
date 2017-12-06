@@ -159,6 +159,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\PaymentMethod.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\ViewModels\EmployeeRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

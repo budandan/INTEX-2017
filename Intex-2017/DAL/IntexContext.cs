@@ -11,6 +11,7 @@ namespace Intex_2017.DAL
     {
         public IntexContext() : base("IntexContext") { }
         public DbSet<Customer> Customers { get; set; }
+		    public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Employee> Employees { get; set; }
     }
 }

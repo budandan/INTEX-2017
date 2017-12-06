@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -11,18 +12,61 @@ namespace Intex_2017.Models
     public class Customer
     {
         [Key]
+		    [DisplayName("Customer ID")]
         public int CustID { get; set; }
-        public String CustFirstName { get; set; }
-        public String CustLastName { get; set; }
-        public String CustAddress1 { get; set; }
-        public String CustAddress2 { get; set; }
-        public String CustCity { get; set; }
-        public String CustState { get; set; }
-        public String CustZip { get; set; }
-        public String CustEmail { get; set; }
-        public String CustPhone { get; set; }
-        public int PaymentMethodID { get; set; }
+
+		    [Required]
+		    [DisplayName("First Name")]
+		    public String CustFirstName { get; set; }
+
+		    [Required]
+	    	[DisplayName("Last Name")]
+		    public String CustLastName { get; set; }
+
+		    [Required]
+	    	[DisplayName("Address 1")]
+	    	public String CustAddress1 { get; set; }
+
+	    	[DisplayName("Address 2")]
+	    	public String CustAddress2 { get; set; }
+
+	    	[Required]
+	    	[DisplayName("City")]
+	    	public String CustCity { get; set; }
+
+	    	[Required]
+	    	[StringLength(2, MinimumLength = 2)]
+	    	[DisplayName("State")]
+	    	public String CustState { get; set; }
+
+		    [Required]
+	    	[DataType(DataType.PostalCode)]
+	    	[DisplayName("Zip")]
+	    	public String CustZip { get; set; }
+
+	    	[Required]
+    		[DataType(DataType.EmailAddress)]
+	    	[DisplayName("Email Address")]
+    		public String CustEmail { get; set; }
+
+
+	    	[DataType(DataType.PhoneNumber)]
+	    	[DisplayName("Phone Number")]
+	    	public String CustPhone { get; set; }
+
+    		[Required]
+    		[DisplayName("Payment Method")]
+	    	public int PaymentMethodID { get; set; }
+
+	    	[Required]
+	    	[StringLength(20, MinimumLength = 5)]
+	    	[DisplayName("User Name")]
+	    	public String CustUserName { get; set; }
+
+        [Required]
+        [StringLength(50, MinimumLength = 5)]
+        [DataType(DataType.Password)]
+        [DisplayName("Password")]
         public String CustPassword { get; set; }
-        public String CustUsername { get; set; }
     }
 }
