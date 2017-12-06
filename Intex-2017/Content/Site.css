@@ -1,12 +1,16 @@
-﻿body {
+﻿.Site {
     padding-top: 50px;
     padding-bottom: 20px;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
 /* Set padding to keep content from hitting the edges */
-.body-content {
+.Site-content {
     padding-left: 15px;
     padding-right: 15px;
+    flex: 1;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -22,3 +26,16 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#homejumbotron {
+    background-image: url("elisa.jpg");
+    background-size: cover;
+}
+
+.transparent {
+    padding: 20px;
+    background-color: white;
+    opacity: 0.85;
+}
+
+

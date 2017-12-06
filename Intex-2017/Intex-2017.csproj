@@ -167,11 +167,13 @@
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\ViewModels\EmployeeRole.cs" />
     <Compile Include="Models\ViewModels\OpenTicketsViewModel.cs" />
+    <Compile Include="Models\ViewModels\SalesAgentCustomerListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\elisa.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -238,6 +240,7 @@
     <Content Include="Views\CallTickets\CustomerConfirmTicket.cshtml" />
     <Content Include="Views\ControlPanels\SysAdmin.cshtml" />
     <Content Include="Views\ControlPanels\SalesAgent.cshtml" />
+    <Content Include="Views\Customers\IndexSalesAgent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

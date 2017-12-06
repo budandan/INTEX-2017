@@ -5,15 +5,12 @@
 
 
 
-<div class="login" style="background-color: #ADD8E6">
-    <br />
-    <br />
-    <div class="row text-center animated fadeInDown"><h2>Customer Portal</h2></div>
+<div class="jumbotron animated fadeIn" style="background-color: #ADD8E6">
+    <div class="row text-center">
+        <h2>Customer Portal</h2>
+    </div>
 
-    <br />
-    <br />
-    <div class="text-center animated fadeInDown">
-
+    <div class="text-center">
         @using (Html.BeginForm("CustomerLogin", "Login", FormMethod.Post))
         {
             <div class="row"><span class="text-danger text-center">@ViewBag.Message</span><span class="text-success text-center">@ViewBag.createSuccess</span></div>

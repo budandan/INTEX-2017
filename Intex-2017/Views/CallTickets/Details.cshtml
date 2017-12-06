@@ -1,51 +1,40 @@
-﻿@model Intex_2017.Models.CallTicket
+﻿@model Intex_2017.Models.ViewModels.OpenTicketsViewModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>CallTicket</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CustID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CustID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Subject)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Subject)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Body)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsOpen)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsOpen)
-        </dd>
-
-    </dl>
+<br />
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h4>Ticket Details</h4>
+        <hr />
+        <table class="table table-striped">
+            <tr>
+                <td>Call Ticket Number:</td>
+                <td>@Model.CallTicketID</td>
+            </tr>
+            <tr>
+                <td>Customer Name:</td>
+                <td>@Model.CustFirstName @Model.CustLastName</td>
+            </tr>
+            <tr>
+                <td>Subject:</td>
+                <td>@Model.Subject</td>
+            </tr>
+            <tr>
+                <td>Body:</td>
+                <td>@Model.Body</td>
+            </tr>
+        </table>
+    </div>
 </div>
-@Html.ActionLink("Create Work Order", "Create", "WorkOrders", new { id = Model.CustID }, new { @class = "btn btn-primary"})
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CallTicketID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="row">
+    <div class="col-md-2 col-md-offset-3">
+        @Html.ActionLink("Create Work Order", "Create", "WorkOrders", new { id = ViewBag.CustID }, new { @class = "btn btn-success" })
+        <br />
+        <br />
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-sm btn-default" })
+    </div>
+</div>
+

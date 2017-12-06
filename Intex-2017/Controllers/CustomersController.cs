@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Intex_2017.DAL;
 using Intex_2017.Models;
+using Intex_2017.Models.ViewModels;
+
 
 namespace Intex_2017.Controllers
 {
@@ -16,10 +18,31 @@ namespace Intex_2017.Controllers
         private IntexContext db = new IntexContext();
 
         // GET: Customers
-        [Authorize(Roles = "SysAdmin, SalesAgent")]
+        [Authorize(Roles = "SysAdmin")]
         public ActionResult Index()
         {
             return View(db.Customers.ToList());
+        }
+
+        [Authorize(Roles = "SalesAgent, SysAdmin")]
+        public ActionResult IndexSalesAgent()
+        {
+            List<SalesAgentCustomerListViewModel> viewModelList = new List<SalesAgentCustomerListViewModel>();
+            List<Customer> customerList = new List<Customer>();
+
+            customerList = db.Customers.ToList();
+
+            foreach (Customer c in customerList)
+            {
+                SalesAgentCustomerListViewModel viewModel = new SalesAgentCustomerListViewModel();
+                viewModel.CustFirstName = c.CustFirstName;
+                viewModel.CustLastName = c.CustLastName;
+                viewModel.CustUsername = c.CustUsername;
+                viewModel.CustCompany = c.CustCompany;
+                viewModel.CustPhone = c.CustPhone;
+                viewModelList.Add(viewModel);
+            }
+            return View(viewModelList);
         }
 
         // GET: Customers/Details/5

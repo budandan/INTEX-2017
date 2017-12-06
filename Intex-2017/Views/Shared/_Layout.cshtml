@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link href="https://bootswatch.com/3/readable/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body>
+<body class="Site">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -72,13 +72,18 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content Site-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Northwest Labs</p>
-        </footer>
     </div>
+ 
+    <footer>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <hr />
+                <p>&copy; @DateTime.Now.Year - Northwest Labs</p>
+            </div>
+        </div>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

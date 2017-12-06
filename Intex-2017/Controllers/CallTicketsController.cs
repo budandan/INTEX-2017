@@ -57,12 +57,22 @@ namespace Intex_2017.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CallTicket callTicket = db.CallTickets.Find(id);
-            if (callTicket == null)
+            CallTicket ct = db.CallTickets.Find(id);
+            OpenTicketsViewModel viewModel = new OpenTicketsViewModel();
+            Customer c = new Customer();
+            c = db.Customers.Find(ct.CustID);
+            viewModel.CustFirstName = c.CustFirstName;
+            viewModel.CustLastName = c.CustLastName;
+            viewModel.CustCompany = c.CustCompany;
+            viewModel.Subject = ct.Subject;
+            viewModel.CallTicketID = ct.CallTicketID;
+            viewModel.Body = ct.Body;
+            ViewBag.CustID = ct.CustID;
+            if (ct == null)
             {
                 return HttpNotFound();
             }
-            return View(callTicket);
+            return View(viewModel);
         }
 
         // GET: CallTickets/Create

@@ -3,5 +3,39 @@
     ViewBag.Title = "SysAdmin";
 }
 
-<h2>SysAdmin</h2>
+<h2>System Administrator Control Panel</h2>
+<br />
+<br />
 
+<div class="row animated">
+    <div class="col-md-4 col-md-offset-2 animated fadeInLeft">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Customers</h3>
+            </div>
+            <div class="panel-body">
+                @Html.ActionLink("Manage All Customers", "Index", "Customers", null, new { @class = "btn btn-primary" })
+                <br />
+                <br />
+                @Html.ActionLink("Add Customer", "Create", "Customers", null, new { @class = "btn btn-default" })
+                <br />
+                <br />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default animated fadeInRight">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Employees</h3>
+            </div>
+            <div class="panel-body">
+                @Html.ActionLink("Manage All Employees", "Index", "Employees", null, new { @class = "btn btn-primary" })
+                <br />
+                <br />
+                @Html.ActionLink("Add Employee", "Create", "Employees", null, new { @class = "btn btn-default" })
+                <br />
+                <br />
+            </div>
+        </div>
+    </div>
+</div>

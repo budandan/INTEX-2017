@@ -3,10 +3,23 @@
     ViewBag.Title = "SalesAgent";
 }
 
-<h2>
+<h2 class="animated fadeInDown">
    Sales Representative Control Panel
 </h2>
-
-<div class="row text-center">
-    @Html.ActionLink("Add Customer", "Create", "Customers", null, new { @class = "btn btn-primary"})
+<br />
+<div class="row animated fadeInLeft">
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Customers</h3>
+            </div>
+            <div class="panel-body">
+                @Html.ActionLink("Customer Directory", "IndexSalesAgent", "Customers", null, new { @class = "btn btn-primary" })
+                <br />
+                <br />
+                @Html.ActionLink("Add Customer", "Create", "Customers", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
 </div>
+

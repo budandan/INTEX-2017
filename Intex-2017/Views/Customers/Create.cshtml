@@ -127,10 +127,16 @@
     </div>
 }
 @{
-    if (User.IsInRole("SysAdmin") || (User.IsInRole("SalesAgent")))
+    if (User.IsInRole("SysAdmin"))
     {
         <div>
             @Html.ActionLink("Back to Customer List", "Index", null, new { @class = "btn btn-primary"})
+        </div>
+    }
+    else if (User.IsInRole("SalesAgent"))
+    {
+        <div>
+            @Html.ActionLink("Back to Customer List", "Index", null, new { @class = "btn btn-primary" })
         </div>
     }
 }

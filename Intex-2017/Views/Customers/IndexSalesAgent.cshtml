@@ -1,0 +1,46 @@
+﻿@model List<Intex_2017.Models.ViewModels.SalesAgentCustomerListViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Customer Table</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Customer Name
+        </th>
+        <th>
+            Company
+        </th>
+        <th>
+            Username
+        </th>
+        <th>
+            Phone Number
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.CustFirstName @item.CustLastName
+            </td>
+            <td>
+                @item.CustCompany
+            </td>
+            <td>
+                @item.CustUsername
+            </td>
+            <td>
+                @item.CustPhone
+            </td>
+        </tr>
+    }
+
+</table>
