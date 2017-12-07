@@ -11,5 +11,7 @@ namespace Intex_2017.Models.ViewModels
         public String CustFirstName { get; set; }
         public String CustLastName { get; set; }
         public String CompoundName { get; set; }
+        public decimal ClientQuantity { get; set; }
+        public decimal ActualQuantity { get; set; }
     }
 }

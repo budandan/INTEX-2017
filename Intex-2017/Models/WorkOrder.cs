@@ -23,8 +23,6 @@ namespace Intex_2017.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateDue { get; set; }
 
-        public decimal Weight { get; set; }
-
         [Required]
         public int CustID { get; set; }
 

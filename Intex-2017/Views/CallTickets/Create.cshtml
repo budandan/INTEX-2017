@@ -5,7 +5,11 @@
 }
 <br />
 <h2>New Ticket for @Request.Cookies["firstname"].Value @Request.Cookies["lastname"].Value</h2>
-
+<br />
+<div class="row text-primary">
+    Fill out this form indicating the purpose of this
+</div>
+<br />
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()

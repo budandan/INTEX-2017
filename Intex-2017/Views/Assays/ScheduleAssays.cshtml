@@ -1,7 +1,52 @@
-﻿
+﻿@model List<Intex_2017.Models.ViewModels.LabTechScheduleAssaysViewModel>
 @{
-    ViewBag.Title = "ScheduleAssays";
+    ViewBag.Title = "Schedule Assays";
 }
 
-<h2>ScheduleAssays</h2>
+<div class="row animated fadeInDown text-center">
+    <br />
+    <h2>Receive Compound</h2>
+</div>
+<br />
+<table class="table table-striped animated fadeInDown">
+    <thead>
+        <tr>
+            <th>
+                Work Order Number
+            </th>
+            <th>
+                Assay Name
+            </th>
+            <th>
+                Compound Name
+            </th>
+            <th>
+                Expected Quantity
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.WorkOrderID
+            </td>
+            <td>
+                @item.AssayNameDesc
+            </td>
+            <td>
+                @item.CompoundName
+            </td>
+            <td>
+                @(item.ClientQuantity)mg
+            </td>
+            <td>
+                @Html.ActionLink("Schedule", "ScheduleOneAssay", "Assays", new { AssayID = item.AssayID }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>
 

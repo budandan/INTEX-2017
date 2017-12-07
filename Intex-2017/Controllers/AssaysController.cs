@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Intex_2017.DAL;
 using Intex_2017.Models;
+using Intex_2017.Models.ViewModels;
 
 namespace Intex_2017.Controllers
 {
@@ -16,8 +17,42 @@ namespace Intex_2017.Controllers
     {
         private IntexContext db = new IntexContext();
 
+        [Authorize(Roles = "SysAdmin, LabTech")]
         public ActionResult ScheduleAssays()
         {
+            List<Assay> assayList = new List<Assay>();
+            assayList = db.Assays.ToList();
+
+            List<Assay> assaysNoStartDate = new List<Assay>();
+
+            foreach (Assay a in assayList)
+            {
+                if (a.StartDate == null)
+                {
+                    assaysNoStartDate.Add(a);
+                }
+            }
+
+            List<LabTechScheduleAssaysViewModel> viewModelList = new List<LabTechScheduleAssaysViewModel>();
+
+            foreach (Assay a in assaysNoStartDate)
+            {
+                LabTechScheduleAssaysViewModel viewModel = new LabTechScheduleAssaysViewModel();
+                viewModel.AssayID = a.AssayID;
+                viewModel.WorkOrderID = a.WorkOrderID;
+                viewModel.AssayNameDesc = db.AssayNames.Find(a.AssayNameID).AssayNameDesc;
+                viewModel.ClientQuantity = db.WorkOrders.Find(a.WorkOrderID).ClientQuantity;
+                viewModel.CompoundName = db.Compounds.Find(a.LTNumber).CompoundName;
+                viewModelList.Add(viewModel);
+            }
+
+            return View(viewModelList);
+        }
+
+        public ActionResult ScheduleOneAssay(int? AssayID)
+        {
+
+
             return View();
         }
 

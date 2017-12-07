@@ -409,13 +409,28 @@ namespace Intex_2017.Controllers
         }
 
         [Authorize(Roles = "SysAdmin, LabTech")]
-        public ActionResult MarkAsReceived(String LabTechName, int? woID)
+        public ActionResult WeighCompound(int woID)
         {
-            // mark work order as received and say who received it
+            WorkOrder wo = db.WorkOrders.Find(woID);
+            ViewBag.ClientQuantity = wo.ClientQuantity;
+            ViewBag.WorkOrderID = woID;
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "SysAdmin, LabTech")]
+        public ActionResult MarkAsReceived(FormCollection form)
+        {
+            // parse form
+            int woID = Int32.Parse(form["woID"]);
+            decimal ActualQuantity = Decimal.Parse(form["Mass"]);
+
+            // mark work order as received, override mass and say who received it
             WorkOrder wo = new WorkOrder();
             wo = db.WorkOrders.Find(woID);
-            wo.IsConfirmed = true;
-            var employee = db.Employees.Where(x => x.EmpUsername == LabTechName).FirstOrDefault();
+            wo.IsConfirmed = true; // mark as received
+            wo.ActualQuantity = ActualQuantity; // denote actual quantity
+            var employee = db.Employees.Where(x => x.EmpUsername == User.Identity.Name).FirstOrDefault();
             if (employee != null)
             {
                 wo.ReceivedByWho = employee.EmployeeID;
@@ -443,7 +458,7 @@ namespace Intex_2017.Controllers
                 db.Entry(a).State = EntityState.Modified;
                 db.SaveChanges();
             }
-
+            ViewBag.woID = woID;
             return View();
         }
 

@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "WeighCompound";
+}
+
+<div class="row text-center animated fadeInDown">
+    <br />
+    <h2>Weigh Compound</h2>
+</div>
+
+<div class="row animated fadeInDown">
+    <h4 class="text-danger">Before marking this compound as received, you must first weigh the compound to verify that the actual mass matches the mass the customer specified.</h4>
+    <br />
+    <h5>If the mass differs from what the customer specified, override the mass using the box below.</h5>
+    <h6>Otherwise, leave the box and click "Receive Compound".</h6>
+</div>
+
+<br />
+<br />
+<div class="row animated fadeInDown">
+    @using (Html.BeginForm("MarkAsReceived", "WorkOrders", FormMethod.Post))
+    {
+        <div class="col-md-3 input-group">
+            @Html.TextBox("Mass", (decimal)ViewBag.ClientQuantity, new { @type = "number", @class = "form-control" })
+            <span class="input-group-addon">mg</span>
+        </div>
+        <br />
+        @Html.Hidden("woID", (int?)ViewBag.woID, new { @style = "hidden"})
+        <button type="submit" class="btn btn-success">Receive Compound</button>
+    }
+</div>
+

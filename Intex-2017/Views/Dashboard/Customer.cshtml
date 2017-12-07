@@ -22,12 +22,12 @@
     <div class="col-md-4 text-center">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title text-center">Place An Order</h3>
+                <h3 class="panel-title text-center">Contact Us</h3>
             </div>
             <div class="panel-body">
-                <p>Start a ticket to send to our sales reps so that we may call you to place an order.</p>
+                <p>Contact us through this form to place an order, ask for support or make some suggestions. You may also call us at 555-555-5555.</p>
                 <br />
-                @Html.ActionLink("Start Ticket", "Create", "CallTickets", new { id = User.Identity.Name }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Contact Us", "Create", "CallTickets", new { id = User.Identity.Name }, new { @class = "btn btn-primary" })
             </div>
         </div>
     </div>
@@ -37,10 +37,10 @@
                 <h3 class="panel-title text-center">See Your Work Orders</h3>
             </div>
             <div class="panel-body">
-                <p>See the status of your assay orders here.</p>
+                <p>See the status and results of your assay orders here.</p>
                 <br />
                 <br />
-                @Html.ActionLink("See Orders", "CustomerViewIndex", "WorkOrders", new { id = User.Identity.Name }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("See My Orders", "CustomerViewIndex", "WorkOrders", new { id = User.Identity.Name }, new { @class = "btn btn-primary" })
             </div>
         </div>
     </div>
