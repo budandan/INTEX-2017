@@ -376,6 +376,77 @@ namespace Intex_2017.Controllers
             return View();
         }
 
+        [Authorize(Roles = "SysAdmin, LabTech")]
+        public ActionResult ReceiveCompound()
+        {
+            List<WorkOrder> workOrderList = new List<WorkOrder>();
+            workOrderList = db.WorkOrders.ToList();
+
+            List<WorkOrder> workOrderListNotReceived = new List<WorkOrder>();
+
+            // get all work orders that have not been received
+            foreach (WorkOrder wo in workOrderList)
+            {
+                if (wo.IsConfirmed == false)
+                {
+                    workOrderListNotReceived.Add(wo);
+                }
+            }
+
+            List<LabTechReceiveCompoundViewModel> viewModelList = new List<LabTechReceiveCompoundViewModel>();
+
+            foreach (WorkOrder wo in workOrderListNotReceived)
+            {
+                LabTechReceiveCompoundViewModel viewModel = new LabTechReceiveCompoundViewModel();
+                viewModel.WorkOrderID = wo.WorkOrderID;
+                viewModel.CustFirstName = db.Customers.Find(wo.CustID).CustFirstName;
+                viewModel.CustLastName = db.Customers.Find(wo.CustID).CustLastName;
+                viewModel.CompoundName = db.Compounds.Find(wo.LTNumber).CompoundName;
+                viewModelList.Add(viewModel);
+            }
+
+            return View(viewModelList);
+        }
+
+        [Authorize(Roles = "SysAdmin, LabTech")]
+        public ActionResult MarkAsReceived(String LabTechName, int? woID)
+        {
+            // mark work order as received and say who received it
+            WorkOrder wo = new WorkOrder();
+            wo = db.WorkOrders.Find(woID);
+            wo.IsConfirmed = true;
+            var employee = db.Employees.Where(x => x.EmpUsername == LabTechName).FirstOrDefault();
+            if (employee != null)
+            {
+                wo.ReceivedByWho = employee.EmployeeID;
+            }
+            db.Entry(wo).State = EntityState.Modified;
+            db.SaveChanges();
+
+            // mark all of those work order's assays as received
+            List<Assay> assayList = new List<Assay>();
+            assayList = db.Assays.ToList();
+
+            List<Assay> workOrderAssays = new List<Assay>();
+
+            foreach (Assay a in assayList)
+            {
+                if (a.WorkOrderID == woID)
+                {
+                    workOrderAssays.Add(a);
+                }
+            }
+
+            foreach (Assay a in workOrderAssays)
+            {
+                a.StatusID = 2;
+                db.Entry(a).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            return View();
+        }
+
         // GET: WorkOrders/Edit/5
         public ActionResult Edit(int? id)
         {

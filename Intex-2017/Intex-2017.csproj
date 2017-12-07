@@ -149,6 +149,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IntexRoleProvider.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AssaysController.cs" />
     <Compile Include="Controllers\CallTicketsController.cs" />
     <Compile Include="Controllers\ControlPanelsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
@@ -175,6 +176,8 @@
     <Compile Include="Models\ViewModels\CustomerSeeWorkOrdersViewModel.cs" />
     <Compile Include="Models\ViewModels\CustomerViewAssaysViewModel.cs" />
     <Compile Include="Models\ViewModels\EmployeeRole.cs" />
+    <Compile Include="Models\ViewModels\LabTechReceiveCompoundViewModel.cs" />
+    <Compile Include="Models\ViewModels\LabTechScheduleAssaysViewModel.cs" />
     <Compile Include="Models\ViewModels\OpenTicketsViewModel.cs" />
     <Compile Include="Models\ViewModels\SalesAgentCustomerListViewModel.cs" />
     <Compile Include="Models\ViewModels\PreWorkOrderViewModel.cs" />
@@ -268,6 +271,14 @@
     <Content Include="Views\WorkOrders\VerifyCreditConfirm.cshtml" />
     <Content Include="Views\WorkOrders\CustomerViewIndex.cshtml" />
     <Content Include="Views\WorkOrders\CustomerViewAssays.cshtml" />
+    <Content Include="Views\Assays\Create.cshtml" />
+    <Content Include="Views\Assays\Delete.cshtml" />
+    <Content Include="Views\Assays\Details.cshtml" />
+    <Content Include="Views\Assays\Edit.cshtml" />
+    <Content Include="Views\Assays\Index.cshtml" />
+    <Content Include="Views\WorkOrders\ReceiveCompound.cshtml" />
+    <Content Include="Views\WorkOrders\MarkAsReceived.cshtml" />
+    <Content Include="Views\Assays\ScheduleAssays.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

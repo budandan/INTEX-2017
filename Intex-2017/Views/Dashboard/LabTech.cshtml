@@ -3,5 +3,65 @@
     ViewBag.Title = "LabTech";
 }
 
-<h2>LabTech Dashboard</h2>
+<div class="row animated fadeInDown">
+    <h1>Welcome, @Request.Cookies["firstname"].Value @Request.Cookies["lastname"].Value.</h1>
+</div>
 
+<div class="row animated fadeInDown">
+    <h2>Lab Technician Dashboard</h2>
+</div>
+<br />
+<br />
+<div class="row animated fadeInUp">
+    <div class="col-md-4 text-center">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Receive Compound</h3>
+            </div>
+            <div class="panel-body">
+                <br />
+                <br />
+                <h5>If you have received a compound from a customer, click here to find that customer and mark his compound as received.</h5>
+                <br />
+                <br />
+                <br />
+                <br />
+                @Html.ActionLink("Receive Compound", "ReceiveCompound", "WorkOrders", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 text-center">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Schedule Assays</h3>
+            </div>
+            <div class="panel-body">
+                <h3 class="text-center">
+                    There are
+                </h3>
+                <h1 class="text-danger">@ViewBag.NoOfUnscheduledAssays</h1>
+                <h3 class="text-center">
+                    assay(s) that need to be scheduled.
+                </h3>
+                @Html.ActionLink("Schedule Assays", "ScheduleAssays", "Assays", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 text-center">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Submit Assay Results</h3>
+            </div>
+            <div class="panel-body">
+                <h3 class="text-center">
+                    There are
+                </h3>
+                <h1 class="text-danger">@ViewBag.NoOfUncompletedAssays</h1>
+                <h3 class="text-center">
+                    assay(s) that need to be submitted.
+                </h3>
+                @Html.ActionLink("Submit Assay Results", "SubmitResults", "Assays", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+</div>

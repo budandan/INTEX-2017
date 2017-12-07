@@ -17,7 +17,7 @@ namespace Intex_2017.Models
 
         [Required]
         public decimal ClientQuantity { get; set; }
-        public String ReceivedByWho { get; set; }
+        public int? ReceivedByWho { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

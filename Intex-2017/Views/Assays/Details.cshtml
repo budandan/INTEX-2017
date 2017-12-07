@@ -1,0 +1,114 @@
+﻿@model Intex_2017.Models.Assay
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Assay</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AssayNameID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssayNameID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkOrderID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkOrderID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Protocol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Protocol)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstDuration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstDuration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatusID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuantResults)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantResults)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QualResults)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QualResults)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkHoursReq)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkHoursReq)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LTNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LTNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsRequired)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsRequired)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AssayID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

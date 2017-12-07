@@ -1,0 +1,45 @@
+﻿@model List<Intex_2017.Models.ViewModels.LabTechReceiveCompoundViewModel>
+@{
+    ViewBag.Title = "Receive Compound";
+}
+
+<div class="row animated fadeInDown text-center">
+    <br />
+    <h2>Receive Compound</h2>
+</div>
+<br />
+<table class="table table-striped animated fadeInDown">
+    <thead>
+        <tr>
+            <th>
+                Work Order Number
+            </th>
+            <th>
+                Customer Name
+            </th>
+            <th>
+                Compound Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.WorkOrderID
+            </td>
+            <td>
+                @item.CustFirstName @item.CustLastName
+            </td>
+            <td>
+                @item.CompoundName
+            </td>
+            <td>
+                @Html.ActionLink("Mark As Received", "MarkAsReceived", "WorkOrders", new { LabTechName = User.Identity.Name, woID = item.WorkOrderID }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+     }
+
+</table>

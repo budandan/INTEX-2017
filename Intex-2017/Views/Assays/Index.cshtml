@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Intex_2017.Models.Assay>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AssayNameID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkOrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Protocol)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstDuration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuantResults)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QualResults)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkHoursReq)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LTNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsRequired)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cost)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssayNameID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkOrderID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Protocol)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstDuration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuantResults)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QualResults)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkHoursReq)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LTNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsRequired)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cost)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AssayID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AssayID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AssayID })
+        </td>
+    </tr>
+}
+
+</table>

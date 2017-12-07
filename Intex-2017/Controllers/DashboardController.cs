@@ -70,6 +70,20 @@ namespace Intex_2017.Controllers
         [Authorize(Roles = "LabTech, SysAdmin")]
         public ActionResult LabTech()
         {
+            db.con.Open();
+            string query = "SELECT COUNT(*) FROM Assay WHERE StartDate IS NULL";
+            using (var cmd = new SqlCommand(query, db.con))
+            {
+                int rowsAmount = (int)cmd.ExecuteScalar(); // get the value of the count
+                ViewBag.NoOfUnscheduledAssays = rowsAmount;
+            }
+
+            string query2 = "SELECT COUNT(*) FROM Assay WHERE StatusID = 3";
+            using (var cmd = new SqlCommand(query2, db.con))
+            {
+                int rowsAmount = (int)cmd.ExecuteScalar(); // get the value of the count
+                ViewBag.NoOfUncompletedAssays = rowsAmount;
+            }
             return View();
         }
 

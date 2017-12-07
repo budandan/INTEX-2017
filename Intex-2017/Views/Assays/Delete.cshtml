@@ -1,0 +1,120 @@
+﻿@model Intex_2017.Models.Assay
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Assay</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AssayNameID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssayNameID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkOrderID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkOrderID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Protocol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Protocol)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstDuration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstDuration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatusID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuantResults)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantResults)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QualResults)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QualResults)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkHoursReq)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkHoursReq)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LTNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LTNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsRequired)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsRequired)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
