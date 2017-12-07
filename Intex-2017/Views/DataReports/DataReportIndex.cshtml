@@ -1,0 +1,64 @@
+﻿@model List<Intex_2017.Models.ViewModels.ReportsAssayIndexViewModel>
+@{
+    ViewBag.Title = "DataReportIndex";
+}
+<br /><br />
+<div class="row text-center animated fadeInDown">
+    <h3>Upload Data Reports</h3>
+</div>
+<br />
+<table class="table table-striped animated fadeInDown">
+    <thead>
+        <tr>
+            <th>
+                Assay No.
+            </th>
+            <th>
+                Work Order No.
+            </th>
+            <th>
+                Customer Name
+            </th>
+            <th>
+                Company
+            </th>
+            <th>
+                LT Number
+            </th>
+            <th>
+                Due Date
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.AssayID
+            </td>
+            <td>
+                @item.WorkOrderID
+            </td>
+            <td>
+                @item.CustFirstName @item.CustLastName
+            </td>
+            <td>
+                @item.CustCompany
+            </td>
+            <td>
+                @item.LTNumber
+            </td>
+            <td>
+                @item.DueDate.ToString("d")
+            </td>
+            <td>
+                @Html.ActionLink("Upload Data Report", "UploadReport", "DataReports", new { AssayID = item.AssayID }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>
+

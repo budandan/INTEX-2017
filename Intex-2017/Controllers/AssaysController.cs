@@ -190,6 +190,11 @@ namespace Intex_2017.Controllers
             assay.NeedsReports = true;
             db.Entry(assay).State = EntityState.Modified;
             db.SaveChanges();
+
+            DataReport dr = new DataReport();
+            dr.AssayID = AssayID;
+            db.DataReports.Add(dr);
+            db.SaveChanges();
             return View();
         } 
         

@@ -77,6 +77,14 @@ namespace Intex_2017.App_Start
                 {
                     return new string[] { "Reports" }; 
                 }
+                else if (employeeRole.Role == "TechDirector")
+                {
+                    return new string[] { "TechDirector" };
+                }
+                else if (employeeRole.Role == "Manager")
+                {
+                    return new string[] { "Manager" };
+                }
             }
             return new string[] { "Customer" };
         }

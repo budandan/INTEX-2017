@@ -13,6 +13,6 @@ namespace Intex_2017.Models
         [Key]
         public int DataReportID { get; set; }
         public String DataReportPath { get; set; }
-        public int AssayID { get; set; }
+        public int? AssayID { get; set; }
     }
 }

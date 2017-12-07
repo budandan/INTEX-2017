@@ -31,6 +31,18 @@ namespace Intex_2017.Controllers
             {
                 return RedirectToAction("Billing", "Dashboard");
             }
+            else if (User.IsInRole("Reports"))
+            {
+                return RedirectToAction("Reports", "Dashboard");
+            }
+            else if (User.IsInRole("TechDirector"))
+            {
+                return RedirectToAction("TechDirector", "Dashboard");
+            }
+            else if (User.IsInRole("Manager"))
+            {
+                return RedirectToAction("Manager", "Dashboard");
+            }
             return View();
         }
 
@@ -84,6 +96,31 @@ namespace Intex_2017.Controllers
                 int rowsAmount = (int)cmd.ExecuteScalar(); // get the value of the count
                 ViewBag.NoOfUncompletedAssays = rowsAmount;
             }
+            return View();
+        }
+
+        [Authorize(Roles = "SysAdmin, Reports, TechDirector")]
+        public ActionResult Reports()
+        {
+            db.con.Open();
+            string query = "SELECT COUNT(*) FROM DataReport WHERE DataReportPath IS NULL";
+            using (var cmd = new SqlCommand(query, db.con))
+            {
+                int rowsAmount = (int)cmd.ExecuteScalar(); // get the value of the count
+                ViewBag.NoOfDataReports = rowsAmount;
+            }
+            return View();
+        }
+
+        [Authorize(Roles = "SysAdmin, TechDirector")]
+        public ActionResult TechDirector()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "SysAdmin, Manager")]
+        public ActionResult Manager()
+        {
             return View();
         }
 

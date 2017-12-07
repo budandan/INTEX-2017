@@ -154,6 +154,7 @@
     <Compile Include="Controllers\ControlPanelsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DataReportsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="Models\ViewModels\LabTechSubmitAssayResultsViewModel.cs" />
     <Compile Include="Models\ViewModels\LabTechSubmitSampleResultsViewModel.cs" />
     <Compile Include="Models\ViewModels\OpenTicketsViewModel.cs" />
+    <Compile Include="Models\ViewModels\ReportsAssayIndexViewModel.cs" />
     <Compile Include="Models\ViewModels\SalesAgentCustomerListViewModel.cs" />
     <Compile Include="Models\ViewModels\PreWorkOrderViewModel.cs" />
     <Compile Include="Models\ViewModels\VerifyCreditViewModel.cs" />
@@ -291,6 +293,9 @@
     <Content Include="Views\Assays\SendToReporting.cshtml" />
     <Content Include="Views\Assays\UploadResults.cshtml" />
     <Content Include="Views\Assays\FileUploadSuccess.cshtml" />
+    <Content Include="Views\Dashboard\Reports.cshtml" />
+    <Content Include="Views\DataReports\UploadReport.cshtml" />
+    <Content Include="Views\DataReports\DataReportIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
