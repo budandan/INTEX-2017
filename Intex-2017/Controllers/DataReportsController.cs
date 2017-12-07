@@ -77,7 +77,7 @@ namespace Intex_2017.Controllers
                         string folderPath = Path.Combine(Server.MapPath("~/UploadedFiles/DataReports"), fileName);
 
                         // save path to server
-                        dr.DataReportPath = folderPath + fileName;
+                        dr.DataReportPath = folderPath;
                         db.Entry(dr).State = EntityState.Modified;
                         db.SaveChanges();
                         UploadedFile.SaveAs(folderPath);
