@@ -1,7 +1,48 @@
-﻿
+﻿@model Intex_2017.Models.ViewModels.LabTechScheduleOneAssayViewModel
 @{
     ViewBag.Title = "ScheduleOneAssay";
 }
 <br />
-<h4 class="text-primary">test</h4>
+<div class="row text-center">
+    <h2>Schedule Assay No. @ViewBag.AssayID</h2>
+</div>
+<br />
+<br />
+<div class="row">
+    <div class="col-md-2 text-right">
+        <p><b>Work Order No.:</b></p>
+        <p><b>Company:</b></p>
+        <p><b>Customer Name:</b></p>
+        <p><b>Compound:</b></p>
+        <p><b>Comments:</b></p>
+    </div>
+    <div class="col-md-5 text-left">
+        <p>@Model.WorkOrderID</p>
+        <p>@Model.CustCompany</p>
+        <p>@Model.CustFirstName @Model.CustLastName</p>
+        <p>@Model.CompoundName</p>
+        <p>@Model.Comments</p>
+    </div>
+    <div class="col-md-5">
+        <h3 class="text-danger">Set a Start Date for this Assay:</h3>
+        @using (Html.BeginForm("ConfirmScheduledAssay", "Assays", FormMethod.Post))
+        {
+            <div class="form-group">
+                <div class="text-center">
+                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", Value = DateTime.Now } })
+                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Samples">How many samples will this Assay contain?</label>
+                @Html.TextBox("Samples", null, new { @type = "number", @class = "form-control", Value = 1})
+            </div>
+            
+            @Html.Hidden("AssayID", (int?)Model.AssayID)
+            <button type="submit" class="btn btn-success">Schedule Assay</button>
+        }
+
+    </div>
+</div>
+
 

@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "ConfirmScheduledAssay";
+}
+<br />
+<div class="row text-center animated fadeInDown">
+    <h2>Assay Successfully Scheduled</h2>
+    <br />
+    <h4 class="text-success">You have scheduled Assay No. @ViewBag.AssayID for @ViewBag.StartDate.ToString("d"). You may now return to your dashboard.</h4>
+    @Html.ActionLink("Return to Dashboard", "Index", "Dashboard", null, new { @class = "btn btn-default" })
+</div>
+
+
+
+

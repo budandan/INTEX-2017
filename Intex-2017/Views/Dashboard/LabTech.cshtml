@@ -58,9 +58,9 @@
                 </h3>
                 <h1 class="text-danger">@ViewBag.NoOfUncompletedAssays</h1>
                 <h3 class="text-center">
-                    assay(s) that need to be submitted.
+                    assay(s) that require results.
                 </h3>
-                @Html.ActionLink("Submit Assay Results", "SubmitResults", "Assays", null, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Submit Assay Results", "SubmitResultsIndex", "Assays", null, new { @class = "btn btn-primary" })
             </div>
         </div>
     </div>

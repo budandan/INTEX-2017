@@ -1,0 +1,69 @@
+﻿@model List<Intex_2017.Models.ViewModels.LabTechSubmitSampleResultsViewModel>
+@{
+    ViewBag.Title = "SubmitSampleResultsIndex";
+}
+
+<h2>Submit Sample Results for Assay No. @ViewBag.AssayID</h2>
+
+<br />
+<table class="table table-striped animated fadeInDown">
+    <thead>
+        <tr>
+            <th>
+                AssayID
+            </th>
+            <th>
+                Test Tube Number
+            </th>
+            <th>
+                Compound Name
+            </th>
+            <th>
+                Qualitative
+            </th>
+            <th>
+                Quantitative
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.AssayID
+            </td>
+            <td>
+                @item.TestTubeNumber
+            </td>
+            <td>
+                @item.CompoundName
+            </td>
+            <td>
+                @{
+                    if (item.HasQual == true)
+                    {
+                        @Html.ActionLink("Uploaded", "UploadResults", "Assays", new { SampleTestID = item.SampleTestID }, new { @class = "btn btn-default btn-sm disabled" })
+                    }
+                    if (item.HasQual == false)
+                    {
+                        @Html.ActionLink("Upload Qualitative Results", "UploadResults", "Assays", new { SampleTestID = item.SampleTestID, reportType = "Qual" }, new { @class = "btn btn-primary btn-sm" })
+                    }
+                }
+            </td>
+            <td>
+                @{
+                    if (item.HasQuant == true)
+                    {
+                        @Html.ActionLink("Uploaded", "UploadResults", "Assays", new { SampleTestID = item.SampleTestID }, new { @class = "btn btn-default btn-sm disabled" })
+                    }
+                    if (item.HasQuant == false)
+                    {
+                        @Html.ActionLink("Upload Quantitative Results", "UploadResults", "Assays", new { SampleTestID = item.SampleTestID, reportType = "Quant" }, new { @class = "btn btn-primary btn-sm" })
+                    }
+                }
+            </td>
+        </tr>
+    }
+
+</table>

@@ -24,5 +24,6 @@ namespace Intex_2017.Models
         public int LTNumber { get; set; }
         public bool IsRequired { get; set; }
         public decimal Cost { get; set; }
+        public bool NeedsReports { get; set; }
     }
 }

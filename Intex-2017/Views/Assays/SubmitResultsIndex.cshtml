@@ -1,0 +1,56 @@
+﻿@model List<Intex_2017.Models.ViewModels.LabTechSubmitAssayResultsViewModel>
+@{
+    ViewBag.Title = "SubmitResultsIndex";
+}
+
+<br />
+<div class="row text-center animated fadeInDown">
+    <h2>Submit Assay Results</h2>
+</div>
+<br />
+<table class="table table-striped animated fadeInDown">
+    <thead>
+        <tr>
+            <th>
+                AssayID
+            </th>
+            <th>
+                LT Number
+            </th>
+            <th>
+                Compound Name
+            </th>
+            <th>
+                Due Date
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.AssayID
+            </td>
+            <td>
+                @item.LTNumber
+            </td>
+            <td>
+                @item.CompoundName
+            </td>
+            <td>
+                @string.Format("{0:d}", item.DueDate)
+            </td>
+            <td>
+                @Html.ActionLink("Submit Sample Results", "SubmitSampleResultsIndex", "Assays", new { AssayID = item.AssayID }, new { @class = "btn btn-primary" })
+            </td>
+            <td>
+                @Html.ActionLink("Complete Assay", "SendToReporting", "Assays", new { AssayID = item.AssayID }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+}
+
+</table>
+

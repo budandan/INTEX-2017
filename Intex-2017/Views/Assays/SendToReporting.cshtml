@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "SendToReporting";
+}
+
+<br />
+<br />
+<br />
+<div class="row text-center animated fadeInDown">
+    <h3>You have sent reports pertaining to Assay No. @ViewBag.AssayID to Reporting. This Assay is now marked as "Completed".</h3>
+    <h6>You may now return to your dashboard.</h6>
+    @Html.ActionLink("Return to Dashboard", "Index", "Dashboard", null, new { @class = "btn btn-default" })
+</div>
+

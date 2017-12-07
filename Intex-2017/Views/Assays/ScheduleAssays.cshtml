@@ -5,23 +5,32 @@
 
 <div class="row animated fadeInDown text-center">
     <br />
-    <h2>Receive Compound</h2>
+    <h2>Schedule Assays</h2>
 </div>
 <br />
 <table class="table table-striped animated fadeInDown">
     <thead>
         <tr>
             <th>
-                Work Order Number
+                Assay No.
             </th>
             <th>
-                Assay Name
+                Work Order No.
+            </th>
+            <th>
+                Company
+            </th>
+            <th>
+                Customer Name
             </th>
             <th>
                 Compound Name
             </th>
             <th>
-                Expected Quantity
+                Assay Name
+            </th>
+            <th>
+                Due Date
             </th>
             <th></th>
         </tr>
@@ -31,16 +40,25 @@
     {
         <tr>
             <td>
+                @item.AssayID
+            </td>
+            <td>
                 @item.WorkOrderID
             </td>
             <td>
-                @item.AssayNameDesc
+                @item.CustCompany
+            </td>
+            <td>
+                @item.CustFirstName @item.CustLastName
             </td>
             <td>
                 @item.CompoundName
             </td>
             <td>
-                @(item.ClientQuantity)mg
+                @item.AssayNameDesc
+            </td>
+            <td>
+                @item.DueDate.ToShortDateString()
             </td>
             <td>
                 @Html.ActionLink("Schedule", "ScheduleOneAssay", "Assays", new { AssayID = item.AssayID }, new { @class = "btn btn-primary" })
