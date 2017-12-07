@@ -7,6 +7,7 @@ namespace Intex_2017.Models.ViewModels
 {
     public class ReportsAssayIndexViewModel
     {
+        public int DataReportID { get; set; }
         public int? AssayID { get; set; }
         public int? WorkOrderID { get; set; }
         public String CustCompany { get; set; }

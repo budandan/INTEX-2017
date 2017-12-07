@@ -1,7 +1,23 @@
-﻿
-@{
-    ViewBag.Title = "UploadReport";
+﻿@{
+    ViewBag.Title = "UploadDataResults";
 }
+<br />
+<div class="row text-center animated fadeInDown">
+    <h3>Submit Data Report for Assay No. @ViewBag.AssayNo</h3>
+</div>
+<br />
+<br />
+<div class="row animated fadeInDown">
+    <div class="col-md-5">
+        @using (Html.BeginForm("UploadReport", "DataReports", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <p>Data Report File:</p>
+            @Html.TextBox("UploadedFile", null, new { type = "file" })
+            <br />
+            @Html.Hidden("DataReportID", (int)ViewBag.DataReportID)
 
-<h2>UploadReport</h2>
-
+            <input type="submit" class="btn btn-success" name="fileName" value="Upload" />
+            <span>@ViewBag.Message</span>
+        }
+    </div>
+</div>

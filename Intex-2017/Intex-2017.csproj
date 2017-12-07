@@ -296,9 +296,11 @@
     <Content Include="Views\Dashboard\Reports.cshtml" />
     <Content Include="Views\DataReports\UploadReport.cshtml" />
     <Content Include="Views\DataReports\DataReportIndex.cshtml" />
+    <Content Include="Views\DataReports\FileUploadSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadedFiles\DataReports\" />
     <Folder Include="UploadedFiles\txt\" />
   </ItemGroup>
   <ItemGroup>

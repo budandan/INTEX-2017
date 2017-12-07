@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
+using System.Data.Entity;
 
 namespace Intex_2017.Controllers
 {
@@ -35,6 +37,7 @@ namespace Intex_2017.Controllers
             foreach (DataReport dr in assaysNeedingDataReports)
             {
                 ReportsAssayIndexViewModel viewModel = new ReportsAssayIndexViewModel();
+                viewModel.DataReportID = dr.DataReportID;
                 viewModel.AssayID = dr.AssayID;
                 viewModel.WorkOrderID = db.Assays.Find(dr.AssayID).WorkOrderID;
                 viewModel.CustCompany = db.Customers.Find(db.WorkOrders.Find(db.Assays.Find(dr.AssayID).WorkOrderID).CustID).CustCompany;
@@ -48,8 +51,57 @@ namespace Intex_2017.Controllers
         }
 
         [Authorize(Roles = "SysAdmin, Reports, TechDirector")]
-        public ActionResult UploadReport()
+        public ActionResult UploadReport(int? DataReportID)
         {
+            DataReport dr = db.DataReports.Find(DataReportID);
+            ViewBag.AssayNo = dr.AssayID;
+            ViewBag.DataReportID = dr.DataReportID;
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "SysAdmin, Reports, TechDirector")]
+        public ActionResult UploadReport(HttpPostedFileBase UploadedFile, FormCollection form)
+        {
+            // parse incoming form
+            int DataReportID = Int32.Parse(form["DataReportID"]);
+            if (UploadedFile != null)
+            {
+                if (UploadedFile.ContentLength > 0)
+                {
+                    if (Path.GetExtension(UploadedFile.FileName) == ".pdf")
+                    {
+                        DataReport dr = db.DataReports.Find(DataReportID);
+                        int? AssayNumber = dr.AssayID;
+                        string fileName = "DataReport_Assay" + AssayNumber + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ffff") + ".txt";
+                        string folderPath = Path.Combine(Server.MapPath("~/UploadedFiles/DataReports"), fileName);
+
+                        // save path to server
+                        dr.DataReportPath = folderPath + fileName;
+                        db.Entry(dr).State = EntityState.Modified;
+                        db.SaveChanges();
+                        UploadedFile.SaveAs(folderPath);
+                        ViewBag.Message = "File Uploaded Successfully.";
+                        // done saving to folder
+                        return RedirectToAction("FileUploadSuccess", "DataReports", new { AssayID = dr.AssayID });
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Extension not supported.";
+                    }
+                }
+            }
+            else
+            {
+                ViewBag.Message = "File not selected.";
+            }
+            return View();
+        }
+
+        [Authorize(Roles = "SysAdmin, Reports, TechDirectory")]
+        public ActionResult FileUploadSuccess(int? AssayID)
+        {
+            ViewBag.AssayID = AssayID;
             return View();
         }
     }
