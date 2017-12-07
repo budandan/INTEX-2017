@@ -252,6 +252,7 @@
     <Content Include="Views\WorkOrders\Index.cshtml" />
     <Content Include="Views\WorkOrders\SetCompound.cshtml" />
     <Content Include="Views\WorkOrders\SelectAssays.cshtml" />
+    <Content Include="Views\Login\Catalog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

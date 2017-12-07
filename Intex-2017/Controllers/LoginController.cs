@@ -102,6 +102,11 @@ namespace Intex_2017.Controllers
         {
             return View();
         }
+
+        public ActionResult Catalog()
+        {
+            return View();
+        }
         
         public ActionResult Contact()
         {
