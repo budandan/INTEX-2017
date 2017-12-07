@@ -1,0 +1,75 @@
+﻿@model List<Intex_2017.Models.ViewModels.CustomerViewAssaysViewModel>
+@{
+    ViewBag.Title = "CustomerViewIndex";
+}
+
+<div class="row animated fadeInDown text-center">
+    <br />
+    <h2>Work Order No. @ViewBag.WorkOrderNo</h2>
+    <br />
+    <br />
+    <h4>Compound: @ViewBag.compound</h4>
+</div>
+<br />
+<table class="table table-striped animated fadeInDown">
+    <thead>
+        <tr>
+            <th>
+                Assay
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Data Report
+            </th>
+            <th>
+                Summary
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.AssayNameDesc
+            </td>
+            <td>
+                @item.StatusName
+            </td>
+            @{
+                if (item.DataReportPath == null)
+                {
+                    <td>
+                        <button class="btn btn-primary disabled">View</button>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.ActionLink("View", "GetDataReportPDF", "SummaryReports")
+                    </td>
+                }
+            }
+            @{
+                if (item.SummaryReportPath == null)
+                {
+                    <td>
+                        <button class="btn btn-primary disabled">View</button>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.ActionLink("View", "GetSummaryReportPDF", "SummaryReports")
+                    </td>
+                }
+            }
+        </tr>
+     }
+</table>
+
+
+

@@ -43,6 +43,13 @@ namespace Intex_2017.Controllers
         [Authorize(Roles = "Billing, SysAdmin")]
         public ActionResult Billing()
         {
+            db.con.Open();
+            string query = "SELECT COUNT(*) FROM WorkOrder WHERE IsVerified = 0";
+            using (var cmd = new SqlCommand(query, db.con))
+            {
+                int rowsAmount = (int)cmd.ExecuteScalar(); // get the value of the count
+                ViewBag.NoOfPendingWorkOrders = rowsAmount;
+            }
             return View();
         }
 

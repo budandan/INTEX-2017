@@ -1,0 +1,58 @@
+﻿@model List<Intex_2017.Models.ViewModels.CustomerSeeWorkOrdersViewModel>
+@{
+    ViewBag.Title = "CustomerViewIndex";
+}
+
+<div class="row animated fadeInDown text-center">
+    <h2>My Work Orders</h2>
+</div>
+<br />
+<table class="table table-striped animated fadeInDown">
+    <thead>
+        <tr>
+            <th>
+                Work Order Number
+            </th>
+            <th>
+                Date Due
+            </th>
+            <th>
+                Compound Name
+            </th>
+            <th>
+                Verified
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.WorkOrderID
+            </td>
+            <td>
+                @item.DateDue.ToShortDateString()
+            </td>
+            <td>
+                @item.CompoundName
+            </td>
+
+                @{
+                    if (item.IsVerified == true)
+                    {
+                        <td>Yes</td>
+                    }
+                    else
+                    {
+                        <td>No</td>
+                    }
+                }
+            <td>
+                @Html.ActionLink("See Assays", "CustomerViewAssays", new { id = item.WorkOrderID, compound = item.CompoundName }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>

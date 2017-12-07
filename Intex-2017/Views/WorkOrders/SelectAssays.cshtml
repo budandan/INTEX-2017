@@ -1,9 +1,31 @@
-﻿
+﻿@model Intex_2017.Models.ViewModels.PreWorkOrderViewModel
+
 @{
     ViewBag.Title = "SelectAssays";
 }
 
-<h2>Select Assays for @ViewBag.compoundName</h2>
-
+<h2>Select Assays for @Model.CompoundName</h2>
+@{ 
+    using (Html.BeginForm("Quote", "WorkOrders", FormMethod.Post))
+    {
+        @Html.CheckBoxFor(model => model.BiochemicalPharmacology)<span>Biochemical Pharmacology</span>
+        <br/>
+        @Html.CheckBoxFor(model => model.DiscoveryScreen)<span>DiscoveryScreen</span>
+        <br />
+        @Html.CheckBoxFor(model => model.ImmunoScreen)<span>ImmunoScreen</span>
+        <br />
+        @Html.CheckBoxFor(model => model.ProfilingScreen)<span>ProfilingScreen</span>
+        <br />
+        @Html.CheckBoxFor(model => model.PharmaScreen)<span>PharmaScreen</span>
+        <br />
+        @Html.CheckBoxFor(model => model.CustomScreen)<span>CustomScreen</span>
+        <br />
+        @Html.TextBoxFor(model => model.CompoundName, null, new { @style = "visibility: hidden"})
+        @Html.TextBoxFor(model => model.CustID, new { @style = "visibility: hidden" })
+        @Html.TextBoxFor(model => model.LTNumber, new { @style = "visibility: hidden" })
+        @Html.TextBoxFor(model => model.SalesAgentName, new { @style = "visibility: hidden" })
+        <button type="submit" class="btn btn-primary">See Price Quote</button>
+    }
+}
 
 

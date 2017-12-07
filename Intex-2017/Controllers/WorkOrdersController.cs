@@ -6,16 +6,19 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using Intex_2017.DAL;
 using Intex_2017.Models;
 using Intex_2017.Models.ViewModels;
 
 namespace Intex_2017.Controllers
 {
+    [Authorize]
     public class WorkOrdersController : Controller
     {
+        
         private IntexContext db = new IntexContext();
-
+        [Authorize(Roles = "SysAdmin, SalesAgent")]
         public ActionResult SetCompound(int? CustID, String SalesAgentName)
         {
             List<Compound> compoundList = new List<Compound>();
@@ -29,6 +32,7 @@ namespace Intex_2017.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SysAdmin, SalesAgent")]
         public ActionResult SelectAssays(FormCollection form)  
         {
             String LTNumber = form["LTNumber"];
@@ -37,11 +41,102 @@ namespace Intex_2017.Controllers
             String SalesAgentName = form["SalesAgentName"];
 
             Compound c = db.Compounds.Find(key);
-            ViewBag.compoundName = c.CompoundName;
-            ViewBag.CustID = CustID;
-            ViewBag.SalesAgentName = SalesAgentName;
+            List<AssayName> assayList = new List<AssayName>();
+            assayList = db.AssayNames.ToList();
 
-            return View();
+            ViewBag.assayList = assayList;
+
+            PreWorkOrderViewModel viewModel = new PreWorkOrderViewModel();
+            if (CustID != "")
+            {
+                viewModel.CustID = Convert.ToInt32(CustID);
+            }
+            viewModel.CompoundName = c.CompoundName;
+            viewModel.SalesAgentName = SalesAgentName;
+            viewModel.LTNumber = key;
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        [Authorize(Roles = "SysAdmin, SalesAgent")]
+        public ActionResult Quote([Bind(Include = "CompoundName,CustID,LTNumber,SalesAgentName,BiochemicalPharmacology,DiscoveryScreen,ImmunoScreen,ProfilingScreen,PharmaScreen,CustomScreen")] PreWorkOrderViewModel viewModel)
+        {
+            //List<Assay> assayList = new List<Assay>();
+            //assayList = new List<Assay>();
+            //assayList = db.Assays.ToList();
+
+            //List<Assay> completedRequiredAssays = new List<Assay>();
+
+            //List<int> selectedAssayIDs = new List<int>();
+            //if (viewModel.BiochemicalPharmacology)
+            //{
+            //    selectedAssayIDs.Add(1);
+            //}
+            //if (viewModel.BiochemicalPharmacology)
+            //{
+            //    selectedAssayIDs.Add(2);
+            //}
+            //if (viewModel.DiscoveryScreen)
+            //{
+            //    selectedAssayIDs.Add(3);
+            //}
+            //if (viewModel.ImmunoScreen)
+            //{
+            //    selectedAssayIDs.Add(4);
+            //}
+            //if (viewModel.PharmaScreen)
+            //{
+            //    selectedAssayIDs.Add(5);
+            //}
+            //if (viewModel.CustomScreen)
+            //{
+            //    selectedAssayIDs.Add(6);
+            //}
+
+            //// to be added in the calculation for price quote, the assay needs to contain an int AssayNameID, LTNumber and needs to be required
+            //foreach (Assay a in assayList)
+            //{
+            //    if (a.IsRequired == true && a.LTNumber == viewModel.LTNumber && selectedAssayIDs.Contains(a.AssayID))
+            //    {
+            //        completedRequiredAssays.Add(a);
+            //    }
+            //}
+
+            //List<int> numberOfAssaysInCombo = new List<int>();
+            //List<decimal> runningCostOfAssaysInCombo = new List<decimal>();
+            //List<decimal> averages = new List<decimal>();
+            //if (completedRequiredAssays.Count == 0)
+            //{
+            //    ViewBag.Price = "Unable to find a quote. Insufficient data in database.";
+            //}
+            //else
+            //{
+            //    for (int i = 0; i < selectedAssayIDs.Count; i++)
+            //    {
+            //        // average each LT/AssayNameID combo
+            //        numberOfAssaysInCombo[i] = 0;
+            //        foreach (Assay a in completedRequiredAssays)
+            //        {
+            //            if (a.AssayNameID == selectedAssayIDs[i])
+            //            {
+            //                numberOfAssaysInCombo[i]++;
+            //                runningCostOfAssaysInCombo[i] += a.Cost;
+            //            }
+            //        }
+            //        averages[i] = runningCostOfAssaysInCombo[i] / numberOfAssaysInCombo[i];
+            //    }
+            //    // sum all values in averages
+            //    decimal quotedPrice = 0;
+            //    foreach (decimal avg in averages)
+            //    {
+            //        quotedPrice += avg;
+            //    }
+            //    ViewBag.quotedPrice = quotedPrice;
+            //}
+
+            ViewBag.quotedPrice = "[Quoted Price]";
+
+            return View(viewModel);
         }
         // GET: WorkOrders
         public ActionResult Index()
@@ -65,8 +160,23 @@ namespace Intex_2017.Controllers
         }
 
         // GET: WorkOrders/Create
-        public ActionResult Create()
+        [Authorize(Roles = "SysAdmin, SalesAgent")]
+        public ActionResult Create(int LTNumber, int CustID, String SalesAgentName, bool a1, bool a2, bool a3, bool a4, bool a5, bool a6)
         {
+            ViewBag.CustID = CustID;
+            ViewBag.LTNumber = LTNumber;
+
+            var SalesAgentID = db.Database.SqlQuery<int>(
+                "SELECT Employee.EmployeeID FROM Employee WHERE Employee.EmpUsername = \'" + User.Identity.Name + "\'"
+                ).FirstOrDefault();
+
+            ViewBag.SalesAgentID = SalesAgentID;
+            ViewBag.a1 = a1;
+            ViewBag.a2 = a2;
+            ViewBag.a3 = a3;
+            ViewBag.a4 = a4;
+            ViewBag.a5 = a5;
+            ViewBag.a6 = a6;
             return View();
         }
 
@@ -75,16 +185,195 @@ namespace Intex_2017.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "WorkOrderID,Comments,DateArrived,ClientQuantity,ReceivedByWho,DateDue,Weight,CustID,SalesAgentID,ActualQuantity,IsConfirmed,IsVerified")] WorkOrder workOrder)
+        [Authorize(Roles = "SysAdmin, SalesAgent")]
+        public ActionResult Create([Bind(Include = "WorkOrderID,Comments,ClientQuantity,DateDue,CustID,SalesAgentID,LTNumber")] WorkOrder workOrder, FormCollection form)
         {
+            String a1 = form["a1"];
+            String a2 = form["a2"];
+            String a3 = form["a3"];
+            String a4 = form["a4"];
+            String a5 = form["a5"];
+            String a6 = form["a6"];
+
             if (ModelState.IsValid)
             {
                 db.WorkOrders.Add(workOrder);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                Assay assay = new Assay();
+                if (a1 == "True")
+                {
+                    //Assay assay = new Assay();
+                    assay.AssayNameID = 1;
+                    assay.WorkOrderID = workOrder.WorkOrderID;
+                    assay.StatusID = 1;
+                    assay.LTNumber = workOrder.LTNumber;
+                    db.Assays.Add(assay);
+                    db.SaveChanges();
+                }
+                if (a2 == "True")
+                {
+                    // Assay assay = new Assay();
+                    assay.AssayNameID = 2;
+                    assay.WorkOrderID = workOrder.WorkOrderID;
+                    assay.StatusID = 1;
+                    assay.LTNumber = workOrder.LTNumber;
+                    db.Assays.Add(assay);
+                    db.SaveChanges();
+                }
+                if (a3 == "True")
+                {
+                    //Assay assay = new Assay();
+                    assay.AssayNameID = 3;
+                    assay.WorkOrderID = workOrder.WorkOrderID;
+                    assay.StatusID = 1;
+                    assay.LTNumber = workOrder.LTNumber;
+                    db.Assays.Add(assay);
+                    db.SaveChanges();
+                }
+                if (a4 == "True")
+                {
+                    // Assay assay = new Assay();
+                    assay.AssayNameID = 4;
+                    assay.WorkOrderID = workOrder.WorkOrderID;
+                    assay.StatusID = 1;
+                    assay.LTNumber = workOrder.LTNumber;
+                    db.Assays.Add(assay);
+                    db.SaveChanges();
+                }
+                if (a5 == "True")
+                {
+                    //Assay assay = new Assay();
+                    assay.AssayNameID = 5;
+                    assay.WorkOrderID = workOrder.WorkOrderID;
+                    assay.StatusID = 1;
+                    assay.LTNumber = workOrder.LTNumber;
+                    db.Assays.Add(assay);
+                    db.SaveChanges();
+                }
+                if (a6 == "True")
+                {
+
+                    assay.AssayNameID = 6;
+                    assay.WorkOrderID = workOrder.WorkOrderID;
+                    assay.StatusID = 1;
+                    assay.LTNumber = workOrder.LTNumber;
+                    db.Assays.Add(assay);
+                    db.SaveChanges();
+                }
+                ViewBag.CustID = workOrder.CustID;
+                return RedirectToAction("ConfirmWorkOrder", "WorkOrders", new { id = workOrder.WorkOrderID });
             }
 
             return View(workOrder);
+        }
+        [Authorize(Roles = "Customer, SysAdmin")]
+        public ActionResult CustomerViewIndex(int? id)
+        {
+            List<WorkOrder> workOrderList = new List<WorkOrder>();
+            workOrderList = db.WorkOrders.ToList();
+
+            List<CustomerSeeWorkOrdersViewModel> viewModelList = new List<CustomerSeeWorkOrdersViewModel>();
+            foreach (WorkOrder wo in workOrderList)
+            {
+                if (wo.CustID == id)
+                {
+                    CustomerSeeWorkOrdersViewModel viewModel = new CustomerSeeWorkOrdersViewModel();
+                    viewModel.WorkOrderID = wo.WorkOrderID;
+                    viewModel.DateDue = wo.DateDue;
+                    viewModel.CompoundName = db.Compounds.Find(wo.LTNumber).CompoundName;
+                    viewModel.IsVerified = wo.IsVerified;
+                    viewModelList.Add(viewModel);
+                }
+            }
+            return View(viewModelList);
+        }
+        [Authorize(Roles = "Customer, SysAdmin")]
+        public ActionResult CustomerViewAssays(int? id, String compound)
+        {
+            List<Assay> assayList = new List<Assay>();
+            assayList = db.Assays.ToList();
+
+            List<CustomerViewAssaysViewModel> viewModelList = new List<CustomerViewAssaysViewModel>();
+            foreach (Assay a in assayList)
+            {
+                if (a.WorkOrderID == id)
+                {
+                    CustomerViewAssaysViewModel viewModel = new CustomerViewAssaysViewModel();
+                    viewModel.AssayNameDesc = db.AssayNames.Find(a.AssayNameID).AssayNameDesc;
+                    viewModel.StatusName = db.Statuses.Find(a.StatusID).StatusName;
+                    var dataReport = db.DataReports.Where(x => x.AssayID == a.AssayID).FirstOrDefault();
+                    if (dataReport != null)
+                    {
+                        viewModel.DataReportPath = dataReport.DataReportPath;
+                    }
+                    var summaryReport = db.SummaryReports.Where(x => x.AssayID == a.AssayID).FirstOrDefault();
+                    if (summaryReport != null)
+                    {
+                        viewModel.SummaryReportPath = summaryReport.SummaryReportPath;
+                    }
+                    viewModelList.Add(viewModel);
+                }
+            }
+            ViewBag.WorkOrderNo = id;
+            ViewBag.compound = compound; // set compound name for the view
+            return View(viewModelList);
+        }
+
+        public ActionResult ConfirmWorkOrder(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+
+        [Authorize(Roles = "SysAdmin, Billing")]
+        public ActionResult VerifyCreditIndex()
+        {
+            List<WorkOrder> workOrderList = new List<WorkOrder>();
+            workOrderList = db.WorkOrders.ToList();
+
+            List<WorkOrder> workOrderListToModify = new List<WorkOrder>();
+            workOrderListToModify = db.WorkOrders.ToList();
+            foreach (WorkOrder wo in workOrderList)
+            {
+                if (wo.IsVerified == true)
+                {
+                    workOrderListToModify.Remove(wo);
+                }
+            }
+
+            List<VerifyCreditViewModel> viewModelList = new List<VerifyCreditViewModel>();
+            foreach (WorkOrder wo in workOrderListToModify)
+            {
+                VerifyCreditViewModel viewModel = new VerifyCreditViewModel();
+                viewModel.WorkOrderID = wo.WorkOrderID;
+                viewModel.CustCompany = db.Customers.Find(wo.CustID).CustCompany;
+                viewModel.CustFirstName = db.Customers.Find(wo.CustID).CustFirstName;
+                viewModel.CustLastName = db.Customers.Find(wo.CustID).CustLastName;
+                viewModelList.Add(viewModel);
+            }
+            return View(viewModelList);
+        }
+
+        [Authorize(Roles = "SysAdmin, Billing")]
+        public ActionResult VerifyCredit(int? id)
+        {
+            WorkOrder wo = db.WorkOrders.Find(id);
+            VerifyCreditViewModel viewModel = new VerifyCreditViewModel();
+            viewModel.WorkOrderID = db.WorkOrders.Find(id).WorkOrderID;
+            viewModel.CustCompany= db.Customers.Find(wo.CustID).CustCompany;
+            viewModel.CustFirstName = db.Customers.Find(wo.CustID).CustFirstName;
+            viewModel.CustLastName = db.Customers.Find(wo.CustID).CustLastName;
+            return View(viewModel);
+        }
+
+        [Authorize(Roles = "SysAdmin, Billing")]
+        public ActionResult VerifyCreditConfirm(int? id)
+        {
+            WorkOrder wo = db.WorkOrders.Find(id);
+            wo.IsVerified = true;
+            db.Entry(wo).State = EntityState.Modified;
+            db.SaveChanges();
+            return View();
         }
 
         // GET: WorkOrders/Edit/5

@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "VerifyCreditConfirm";
+}
+
+<div class="row text-center animated fadeInDown">
+    <h2>Work Order Credit Confirmed</h2>
+    <br />
+    <h4 class="text-success">You have verified the following Work Order:</h4>
+    <p>Work Order Number: @ViewBag.id</p>
+    @Html.ActionLink("Return to Dashboard", "Index", "Dashboard", null, new { @class = "btn btn-default" })
+</div>
+

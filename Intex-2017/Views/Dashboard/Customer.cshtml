@@ -7,7 +7,7 @@
     <h1>Welcome, @Request.Cookies["firstname"].Value @Request.Cookies["lastname"].Value.</h1>
 </div>
 
-<div class="row animated fadeIn">
+<div class="row animated fadeInDown">
     <h2>My Dashboard</h2>
 </div>
 
@@ -40,7 +40,7 @@
                 <p>See the status of your assay orders here.</p>
                 <br />
                 <br />
-                @Html.ActionLink("See Orders", "GetCustOrders", "WorkOrders", new { id = User.Identity.Name }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("See Orders", "CustomerViewIndex", "WorkOrders", new { id = User.Identity.Name }, new { @class = "btn btn-primary" })
             </div>
         </div>
     </div>

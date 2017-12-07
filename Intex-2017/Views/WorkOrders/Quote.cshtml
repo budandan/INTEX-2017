@@ -1,0 +1,45 @@
+﻿@model Intex_2017.Models.ViewModels.PreWorkOrderViewModel
+@{
+    ViewBag.Title = "Quote";
+}
+
+<h2>Price Quote</h2>
+
+
+<div class="row">
+    <div class="col-md-5 col-md-offset-1 text-center">
+        <h1>Assays Selected</h1>
+        @{
+            if (Model.BiochemicalPharmacology)
+            {
+                <p>Biochemical Pharmacology</p>
+            }
+            if (Model.DiscoveryScreen)
+            {
+                <p>DiscoveryScreen</p>
+            }
+            if (Model.ImmunoScreen)
+            {
+                <p>ImmunoScreen</p>
+            }
+            if (Model.ProfilingScreen)
+            {
+                <p>ProfilingScreen</p>
+            }
+            if (Model.PharmaScreen)
+            {
+                <p>PharmaScreen</p>
+            }
+            if (Model.CustomScreen)
+            {
+                <p>CustomScreen</p>
+            }
+        }
+    </div>
+    <div class="col-md-5">
+        <br />
+        <h4>Price Quote: $@ViewBag.quotedPrice</h4>
+        @Html.ActionLink("Accept", "Create", "WorkOrders", new { LTNumber = Model.LTNumber, CustID = Model.CustID, SalesAgentName = Model.SalesAgentName, a1 = Model.BiochemicalPharmacology, a2 = Model.DiscoveryScreen, a3 = Model.ImmunoScreen, a4 = Model.ProfilingScreen, a5 = Model.PharmaScreen, a6 = Model.CustomScreen }, new { @class = "btn btn-success" })
+        @Html.ActionLink("Reject", "Index", "Dashboard", null, new { @class = "btn btn-danger" })
+    </div>
+</div>

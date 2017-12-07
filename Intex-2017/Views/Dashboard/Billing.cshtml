@@ -3,5 +3,48 @@
     ViewBag.Title = "Billing";
 }
 
-<h2>Billing Dashboard</h2>
+<div class="row animated fadeInDown">
+    <h1>Welcome, @Request.Cookies["firstname"].Value @Request.Cookies["lastname"].Value.</h1>
+</div>
 
+<div class="row animated fadeIn">
+    <h2>Biling Agent Dashboard</h2>
+</div>
+
+<br />
+<br />
+<div class="row">
+    <div class="col-md-4 col-md-offset-2 text-center animated fadeInUp">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Verify Pending Work Orders</h3>
+            </div>
+            <div class="panel-body">
+                <h3 class="text-center">
+                    There are
+                </h3>
+                <h1 class="text-danger">@ViewBag.NoOfPendingWorkOrders</h1>
+                <h3 class="text-center">
+                    pending work order(s) that require(s) verification.
+                </h3>
+                @Html.ActionLink("See Pending Work Orders", "VerifyCreditIndex", "WorkOrders", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 text-center animated fadeInUp">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Create Invoice</h3>
+            </div>
+            <div class="panel-body">
+                <h3 class="text-center">
+                    Create Invoices for work orders that dont have invoices yet. //TODO
+                </h3>
+                <br />
+                <br />
+                <br />
+                @Html.ActionLink("Create Work Order", "SetCompound", "WorkOrders", new { SalesAgentName = User.Identity.Name }, new { @class = "btn btn-success" })
+            </div>
+        </div>
+    </div>
+</div>

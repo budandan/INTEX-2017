@@ -162,15 +162,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Assay.cs" />
+    <Compile Include="Models\AssayName.cs" />
     <Compile Include="Models\CallTicket.cs" />
     <Compile Include="Models\Compound.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\DataReport.cs" />
     <Compile Include="Models\PaymentMethod.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\SummaryReport.cs" />
+    <Compile Include="Models\ViewModels\CustomerSeeWorkOrdersViewModel.cs" />
+    <Compile Include="Models\ViewModels\CustomerViewAssaysViewModel.cs" />
     <Compile Include="Models\ViewModels\EmployeeRole.cs" />
     <Compile Include="Models\ViewModels\OpenTicketsViewModel.cs" />
     <Compile Include="Models\ViewModels\SalesAgentCustomerListViewModel.cs" />
     <Compile Include="Models\ViewModels\PreWorkOrderViewModel.cs" />
+    <Compile Include="Models\ViewModels\VerifyCreditViewModel.cs" />
     <Compile Include="Models\WorkOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -252,6 +260,13 @@
     <Content Include="Views\WorkOrders\Index.cshtml" />
     <Content Include="Views\WorkOrders\SetCompound.cshtml" />
     <Content Include="Views\WorkOrders\SelectAssays.cshtml" />
+    <Content Include="Views\WorkOrders\Quote.cshtml" />
+    <Content Include="Views\WorkOrders\ConfirmWorkOrder.cshtml" />
+    <Content Include="Views\WorkOrders\VerifyCredit.cshtml" />
+    <Content Include="Views\WorkOrders\VerifyCreditIndex.cshtml" />
+    <Content Include="Views\WorkOrders\VerifyCreditConfirm.cshtml" />
+    <Content Include="Views\WorkOrders\CustomerViewIndex.cshtml" />
+    <Content Include="Views\WorkOrders\CustomerViewAssays.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

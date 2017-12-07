@@ -1,0 +1,36 @@
+﻿@model Intex_2017.Models.ViewModels.VerifyCreditViewModel
+@{
+    ViewBag.Title = "VerifyCredit";
+}
+
+<h2>Verify Work Order</h2>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h4>Work Order Details</h4>
+        <hr />
+        <table class="table table-striped">
+            <tr>
+                <td>Work Order Number:</td>
+                <td>@Model.WorkOrderID</td>
+            </tr>
+            <tr>
+                <td>Customer Name:</td>
+                <td>@Model.CustFirstName @Model.CustLastName</td>
+            </tr>
+            <tr>
+                <td>Company:</td>
+                <td>@Model.CustCompany</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2 col-md-offset-3">
+        @Html.ActionLink("Verify Work Order", "VerifyCreditConfirm", "WorkOrders", new { id = Model.WorkOrderID }, new { @class = "btn btn-success" })
+        <br />
+        <br />
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-sm btn-default" })
+    </div>
+</div>
+
