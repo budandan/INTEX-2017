@@ -1,0 +1,65 @@
+﻿@model List<Intex_2017.Models.ViewModels.ReportsSeeAssayResultsViewModel>
+@{
+    ViewBag.Title = "GetSampleResults";
+}
+
+<br /><br />
+<div class="row text-center animated fadeInDown">
+    <h3>Get Sample Results For Assay No. @ViewBag.AssayID</h3>
+</div>
+<br />
+<table class="table table-striped animated fadeInDown">
+    <thead>
+        <tr>
+            <th>
+                LT Number
+            </th>
+            <th>
+                Compound Sequence Code
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.LTNumber
+            </td>
+            <td>
+                @item.CompoundSeqCode
+            </td>
+            @{ 
+                if (item.QualResultsPath == null)
+                {
+                    <td>
+                        <button class="btn btn-default btn-sm disabled">None</button>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.ActionLink("Download Qualitative Results", "DownloadQualResults", "Assays", new { QualResultsPath = item.QualResultsPath }, new { @class = "btn btn-sm btn-primary" })
+                    </td>
+                }
+            }
+            @{
+                if (item.QuantResultsPath == null)
+                {
+                    <td>
+                        <button class="btn btn-default btn-sm disabled">None</button>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.ActionLink("Download Quantitative Results", "DownloadQuantResults", "Assays", new { QuantResultsPath = item.QuantResultsPath }, new { @class = "btn  btn-sm btn-primary" })
+                    </td>
+                }
+            }
+        </tr>
+    }
+
+</table>

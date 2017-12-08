@@ -5,6 +5,7 @@
 <br /><br />
 <div class="row text-center animated fadeInDown">
     <h3>Upload Data Reports</h3>
+    <h5 class="text-danger">Make sure to download sample results for each assay and use the Excel program to save them to the network drive BEFORE uploading the Data Report.</h5>
 </div>
 <br />
 <table class="table table-striped animated fadeInDown">
@@ -55,7 +56,10 @@
                 @item.DueDate.ToString("d")
             </td>
             <td>
-                @Html.ActionLink("Upload Data Report", "UploadReport", "DataReports", new { DataReportID = item.DataReportID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Download Sample Results", "GetSampleResults", "Assays", new { AssayID = item.AssayID }, new { @class = "btn btn-sm btn-success" })
+            </td>
+            <td>
+                @Html.ActionLink("Upload Data Report", "UploadReport", "DataReports", new { DataReportID = item.DataReportID }, new { @class = "btn btn-sm btn-primary" })
             </td>
         </tr>
     }

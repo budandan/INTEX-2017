@@ -254,19 +254,28 @@ namespace Intex_2017.Controllers
                 {
                     if (Path.GetExtension(UploadedFile.FileName) == ".txt")
                     {
-                        string fileName = TestTubeNumber + "-" + "AssayNo_" + AssayID + "-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ffff") + ".txt";
-                        string folderPath = Path.Combine(Server.MapPath("~/UploadedFiles/txt"), fileName);
-
-                        // save path to server
                         String reportType = form["ReportType"];
-                        SampleTest st = db.SampleTests.Find(SampleTestID);
+                        string fileName = "";
                         if (reportType == "Qual")
                         {
-                            st.QualResultsPath = fileName;
+                            fileName = TestTubeNumber + "-" + "AssayNo_" + AssayID + "-Qual-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ffff") + ".txt";
                         }
                         else if (reportType == "Quant")
                         {
-                            st.QuantResultsPath = fileName;
+                            fileName = TestTubeNumber + "-" + "AssayNo_" + AssayID + "-Quant-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ffff") + ".txt";
+                        }
+                        string folderPath = Path.Combine(Server.MapPath("~/UploadedFiles/txt"), fileName);
+
+                        // save path to server
+                        
+                        SampleTest st = db.SampleTests.Find(SampleTestID);
+                        if (reportType == "Qual")
+                        {
+                            st.QualResultsPath = folderPath;
+                        }
+                        else if (reportType == "Quant")
+                        {
+                            st.QuantResultsPath = folderPath;
                         }
                         db.Entry(st).State = EntityState.Modified;
                         db.SaveChanges();
@@ -293,6 +302,56 @@ namespace Intex_2017.Controllers
         {
             ViewBag.AssayID = AssayID;
             return View();
+        }
+
+        [Authorize(Roles = "SysAdmin, Reports, TechDirector")]
+        public ActionResult GetSampleResults(int? AssayID) 
+        {
+            // get all sample result rows with that AssayID
+            List<SampleTest> stList = new List<SampleTest>();
+            stList = db.SampleTests.ToList();
+
+            List<SampleTest> stInArray = new List<SampleTest>();
+
+            foreach (SampleTest st in stList)
+            {
+                if (st.AssayID == AssayID)
+                {
+                    stInArray.Add(st);
+                }
+            }
+
+            List<ReportsSeeAssayResultsViewModel> viewModelList = new List<ReportsSeeAssayResultsViewModel>();
+
+            foreach (SampleTest st in stInArray)
+            {
+                ReportsSeeAssayResultsViewModel viewModel = new ReportsSeeAssayResultsViewModel();
+                viewModel.LTNumber = st.LTNumber;
+                viewModel.CompoundSeqCode = st.CompoundSeqCode;
+                viewModel.QualResultsPath = st.QualResultsPath;
+                viewModel.QuantResultsPath = st.QuantResultsPath;
+                viewModelList.Add(viewModel);
+            }
+
+            ViewBag.AssayID = AssayID;
+
+            return View(viewModelList);
+        }
+
+        [Authorize(Roles = "SysAdmin, TechDirector, Reports")]
+        public FileResult DownloadQualResults(String QualResultsPath)
+        {
+            byte[] fileBytes = System.IO.File.ReadAllBytes(QualResultsPath);
+            string fileName = QualResultsPath.Remove(0, 68);
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+        [Authorize(Roles = "SysAdmin, TechDirector, Reports")]
+        public FileResult DownloadQuantResults(String QuantResultsPath)
+        {
+            byte[] fileBytes = System.IO.File.ReadAllBytes(QuantResultsPath);
+            String fileName = QuantResultsPath.Remove(0, 68);
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
 
         // GET: Assays
