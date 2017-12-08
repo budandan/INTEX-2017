@@ -149,7 +149,54 @@ namespace Intex_2017.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Customer, SysAdmin, Manager")]
+        [Authorize(Roles = "SysAdmin, TechDirector")]
+        public ActionResult ViewDataReports(int? WorkOrderID)
+        {
+            List<DataReport> drList = new List<DataReport>();
+            drList = db.DataReports.ToList();
+
+            List<DataReport> drInWorkOrder = new List<DataReport>();
+            List<Assay> assayList = db.Assays.ToList();
+            List<Assay> assayInWO = new List<Assay>();
+
+            foreach (Assay a in assayList)
+            {
+                if (a.WorkOrderID == WorkOrderID)
+                {
+                    assayInWO.Add(a);
+                }
+            }
+
+            foreach (DataReport dr in drList)
+            {
+                foreach (Assay a in assayInWO)
+                {
+                    if (dr.AssayID == a.AssayID)
+                    {
+                        drInWorkOrder.Add(dr);
+                    }
+                }
+            }
+
+            List<TechDirectorViewDataReportsViewModel> viewModelList = new List<TechDirectorViewDataReportsViewModel>();
+
+            foreach (DataReport dr in drInWorkOrder)
+            {
+                TechDirectorViewDataReportsViewModel viewModel = new TechDirectorViewDataReportsViewModel();
+                viewModel.AssayID = dr.AssayID;
+                viewModel.WorkOrderID = db.Assays.Find(dr.AssayID).WorkOrderID;
+                viewModel.CompoundName = db.Compounds.Find(db.Assays.Find(dr.AssayID).LTNumber).CompoundName;
+                viewModel.CustFirstName = db.Customers.Find(db.WorkOrders.Find(db.Assays.Find(dr.AssayID).WorkOrderID).CustID).CustFirstName;
+                viewModel.CustLastName = db.Customers.Find(db.WorkOrders.Find(db.Assays.Find(dr.AssayID).WorkOrderID).CustID).CustLastName;
+                viewModel.LTNumber = db.Assays.Find(dr.AssayID).LTNumber;
+                viewModel.DataReportPath = dr.DataReportPath;
+                viewModelList.Add(viewModel);
+            }
+            ViewBag.WorkOrderID = WorkOrderID;
+            return View(viewModelList);
+        }
+
+        [Authorize(Roles = "Customer, SysAdmin, Manager, TechDirector")]
         public ActionResult GetDataReportPDF(String DataReportPath)
         {
             return File(DataReportPath, "application/pdf");

@@ -43,7 +43,10 @@
                 @item.DateDue.ToString("d")
             </td>
             <td>
-                @Html.ActionLink("Upload Summary Report", "UploadReport", "SummaryReports", new { SummaryReportID = item.SummaryReportID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("View Data Reports", "ViewDataReports", "DataReports", new { WorkOrderID = item.WorkOrderID }, new { @class = "btn btn-sm btn-success" })
+            </td>
+            <td>
+                @Html.ActionLink("Upload Summary Report", "UploadReport", "SummaryReports", new { SummaryReportID = item.SummaryReportID }, new { @class = "btn btn-sm btn-primary" })
             </td>
         </tr>
     }
