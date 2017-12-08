@@ -65,6 +65,8 @@ namespace Intex_2017.Controllers
         {
             // parse incoming form
             int DataReportID = Int32.Parse(form["DataReportID"]);
+            DataReport postBackDR = db.DataReports.Find(DataReportID);
+            ViewBag.AssayNo = postBackDR.AssayID;
             if (UploadedFile != null)
             {
                 if (UploadedFile.ContentLength > 0)
@@ -95,12 +97,53 @@ namespace Intex_2017.Controllers
             {
                 ViewBag.Message = "File not selected.";
             }
-            return View();
+            return View(DataReportID);
         }
 
         [Authorize(Roles = "SysAdmin, Reports, TechDirectory")]
         public ActionResult FileUploadSuccess(int? AssayID)
         {
+            List<WorkOrder> woList = new List<WorkOrder>();
+            List<Assay> assayList = new List<Assay>();
+            List<DataReport> drList = new List<DataReport>();
+
+            Assay a = db.Assays.Find(AssayID);
+            List<Assay> assaysInThisWorkOrder = new List<Assay>();
+
+            foreach (Assay assay in assayList)
+            {
+                if (assay.WorkOrderID == a.WorkOrderID)
+                {
+                    assaysInThisWorkOrder.Add(assay);
+                }
+            }
+            bool AllDRAreFinished = true;
+            foreach (Assay assay in assaysInThisWorkOrder)
+            {
+                var dr = db.DataReports.Where(x => x.AssayID == assay.AssayID).FirstOrDefault();
+                if (dr == null)
+                {
+                    AllDRAreFinished = false;
+                }
+                else
+                {
+                    if (dr.DataReportPath == null)
+                    {
+                        AllDRAreFinished = false;
+                    }
+                }
+            }
+            
+            if (AllDRAreFinished)
+            {
+                SummaryReport sr = new SummaryReport();
+                sr.WorkOrderID = a.WorkOrderID;
+                db.SummaryReports.Add(sr);
+                db.SaveChanges();
+            }
+
+            WorkOrder wo = db.WorkOrders.Find(a.WorkOrderID);
+
             ViewBag.AssayID = AssayID;
             return View();
         }

@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "UploadSummaryReport";
+}
+<br />
+<div class="row text-center animated fadeInDown">
+    <h3>Submit Summary Report for WorkORrder No. @ViewBag.WorkOrderID</h3>
+</div>
+<br />
+<br />
+<div class="row animated fadeInDown">
+    <div class="col-md-5">
+        @using (Html.BeginForm("UploadReport", "DataReports", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <p>Summary Report File:</p>
+            @Html.TextBox("UploadedFile", null, new { type = "file" })
+            <br />
+            @Html.Hidden("SummaryReportID", (int)ViewBag.SummaryReportID)
+
+            <input type="submit" class="btn btn-success" name="fileName" value="Upload" />
+            <span>@ViewBag.Message</span>
+        }
+    </div>
+</div>

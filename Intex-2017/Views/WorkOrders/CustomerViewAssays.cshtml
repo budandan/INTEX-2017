@@ -23,9 +23,6 @@
             <th>
                 Data Report
             </th>
-            <th>
-                Summary
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -43,33 +40,30 @@
                 if (item.DataReportPath == null)
                 {
                     <td>
-                        <button class="btn btn-primary disabled">View</button>
+                        <button class="btn btn-default disabled">View</button>
                     </td>
                 }
                 else
                 {
                     <td>
-                        @Html.ActionLink("View", "GetDataReportPDF", "SummaryReports")
-                    </td>
-                }
-            }
-            @{
-                if (item.SummaryReportPath == null)
-                {
-                    <td>
-                        <button class="btn btn-primary disabled">View</button>
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        @Html.ActionLink("View", "GetSummaryReportPDF", "SummaryReports")
+                        @Html.ActionLink("View", "GetDataReportPDF", "SummaryReports", null, new { @class = "btn btn-primary"})
                     </td>
                 }
             }
         </tr>
      }
 </table>
-
+<div class="row animated fadeInDown">
+    @{
+        if (ViewBag.HasASummary == false)
+        {
+            <button class="btn btn-default disabled">View Summary Report</button>
+        }
+        else
+        {
+            @Html.ActionLink("View Summary Report", "GetSummaryReportPDF", "SummaryReports", null, new { @class = "btn btn-primary" })
+        }
+    }
+</div>
 
 

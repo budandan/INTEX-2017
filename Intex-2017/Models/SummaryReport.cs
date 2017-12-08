@@ -13,6 +13,6 @@ namespace Intex_2017.Models
         [Key]
         public int SummaryReportID { get; set; }
         public String SummaryReportPath { get; set; }
-        public int AssayID { get; set; }
+        public int? WorkOrderID { get; set; }
     }
 }

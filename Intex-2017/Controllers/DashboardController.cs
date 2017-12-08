@@ -115,6 +115,20 @@ namespace Intex_2017.Controllers
         [Authorize(Roles = "SysAdmin, TechDirector")]
         public ActionResult TechDirector()
         {
+            db.con.Open();
+            string query = "SELECT COUNT(*) FROM DataReport WHERE DataReportPath IS NULL";
+            using (var cmd = new SqlCommand(query, db.con))
+            {
+                int rowsAmount = (int)cmd.ExecuteScalar(); // get the value of the count
+                ViewBag.NoOfDataReports = rowsAmount;
+            }
+
+            string query2 = "SELECT COUNT(A.WorkOrderID) FROM(SELECT DISTINCT Assay.WorkOrderID FROM WorkOrder INNER JOIN Assay ON WorkOrder.WorkOrderID = Assay.WorkOrderID INNER JOIN DataReport ON Assay.AssayID = DataReport.AssayID WHERE Assay.WorkOrderID NOT IN(SELECT Assay.WorkOrderID FROM Assay INNER JOIN DataReport ON Assay.AssayID = DataReport.AssayID WHERE DataReport.DataReportPath IS NULL)) A";
+            using (var cmd = new SqlCommand(query2, db.con))
+            {
+                int rowsAmount = (int)cmd.ExecuteScalar(); // get the value of the count
+                ViewBag.NoOfSummaryReports = rowsAmount;
+            }
             return View();
         }
 

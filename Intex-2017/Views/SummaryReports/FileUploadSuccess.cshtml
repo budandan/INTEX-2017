@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "FileUploadSuccess";
+}
+<br />
+<div class="row animated fadeInDown">
+    <h2 class="text-success">File successfully uploaded.</h2>
+    <h3 class="text-default">You may now return to your dashboard or upload another file.</h3>
+    @Html.ActionLink("Upload Another File", "SummaryReportIndex", "SummaryReports", null, new { @class = "btn btn-success" })
+    <br />
+    <br />
+    @Html.ActionLink("Return To Dashboard", "Index", "Dashboard", null, new { @class = "btn btn-default" })
+</div>
+

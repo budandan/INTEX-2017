@@ -292,7 +292,7 @@ namespace Intex_2017.Controllers
         {
             List<Assay> assayList = new List<Assay>();
             assayList = db.Assays.ToList();
-
+            ViewBag.HasASummary = false;
             List<CustomerViewAssaysViewModel> viewModelList = new List<CustomerViewAssaysViewModel>();
             foreach (Assay a in assayList)
             {
@@ -306,10 +306,11 @@ namespace Intex_2017.Controllers
                     {
                         viewModel.DataReportPath = dataReport.DataReportPath;
                     }
-                    var summaryReport = db.SummaryReports.Where(x => x.AssayID == a.AssayID).FirstOrDefault();
+                    var summaryReport = db.SummaryReports.Where(x => x.WorkOrderID == a.WorkOrderID).FirstOrDefault();
                     if (summaryReport != null)
                     {
                         viewModel.SummaryReportPath = summaryReport.SummaryReportPath;
+                        ViewBag.HasASummary = true;
                     }
                     viewModelList.Add(viewModel);
                 }

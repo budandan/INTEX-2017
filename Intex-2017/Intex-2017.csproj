@@ -159,6 +159,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfilesController.cs" />
+    <Compile Include="Controllers\SummaryReportsController.cs" />
     <Compile Include="Controllers\WorkOrdersController.cs" />
     <Compile Include="DAL\IntexContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -187,6 +188,7 @@
     <Compile Include="Models\ViewModels\ReportsAssayIndexViewModel.cs" />
     <Compile Include="Models\ViewModels\SalesAgentCustomerListViewModel.cs" />
     <Compile Include="Models\ViewModels\PreWorkOrderViewModel.cs" />
+    <Compile Include="Models\ViewModels\TechDirectorSummaryReportsIndexViewModel.cs" />
     <Compile Include="Models\ViewModels\VerifyCreditViewModel.cs" />
     <Compile Include="Models\WorkOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -297,6 +299,10 @@
     <Content Include="Views\DataReports\UploadReport.cshtml" />
     <Content Include="Views\DataReports\DataReportIndex.cshtml" />
     <Content Include="Views\DataReports\FileUploadSuccess.cshtml" />
+    <Content Include="Views\Dashboard\TechDirector.cshtml" />
+    <Content Include="Views\SummaryReports\SummaryReportIndex.cshtml" />
+    <Content Include="Views\SummaryReports\UploadReport.cshtml" />
+    <Content Include="Views\SummaryReports\FileUploadSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

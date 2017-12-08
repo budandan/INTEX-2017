@@ -1,0 +1,53 @@
+﻿@model List<Intex_2017.Models.ViewModels.TechDirectorSummaryReportsIndexViewModel>
+@{
+    ViewBag.Title = "DataReportIndex";
+}
+<br /><br />
+<div class="row text-center animated fadeInDown">
+    <h3>Upload Summary Reports</h3>
+</div>
+<br />
+<table class="table table-striped animated fadeInDown">
+    <thead>
+        <tr>
+            <th>
+                Work Order No.
+            </th>
+            <th>
+                Customer Name
+            </th>
+            <th>
+                Company
+            </th>
+            <th>
+                Due Date
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.WorkOrderID
+            </td>
+            <td>
+                @item.CustFirstName @item.CustLastName
+            </td>
+            <td>
+                @item.CustCompany
+            </td>
+            <td>
+                @item.DateDue.ToString("d")
+            </td>
+            <td>
+                @Html.ActionLink("Upload Summary Report", "UploadReport", "SummaryReports", new { SummaryReportID = item.SummaryReportID }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+

@@ -34,6 +34,8 @@ namespace Intex_2017.Models
 
         [Required]
         public int LTNumber { get; set; }
-        public bool NeedsConditional { get; set; }
+        public bool? NeedsConditional { get; set; }
+        public bool? IsCompleted { get; set; }
+        public bool? IsClosed { get; set; }
     }
 }
