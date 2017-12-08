@@ -398,6 +398,7 @@ namespace Intex_2017.Controllers
         [Authorize(Roles = "SysAdmin, Billing")]
         public ActionResult VerifyCreditConfirm(int? id)
         {
+            ViewBag.id = id;
             WorkOrder wo = db.WorkOrders.Find(id);
             wo.IsVerified = true;
             db.Entry(wo).State = EntityState.Modified;
@@ -416,7 +417,7 @@ namespace Intex_2017.Controllers
             // get all work orders that have not been received
             foreach (WorkOrder wo in workOrderList)
             {
-                if (wo.IsConfirmed == false)
+                if (wo.IsConfirmed == false && wo.IsVerified == true)
                 {
                     workOrderListNotReceived.Add(wo);
                 }

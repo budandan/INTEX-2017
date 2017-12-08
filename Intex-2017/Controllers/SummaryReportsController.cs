@@ -125,7 +125,35 @@ namespace Intex_2017.Controllers
         [Authorize(Roles = "SysAdmin, Manager")]
         public ActionResult ManagerView()
         {
-            return View();
+            List<SummaryReport> srList = new List<SummaryReport>();
+            srList = db.SummaryReports.ToList();
+
+            List<SummaryReport> completedSummaryReports = new List<SummaryReport>();
+
+            foreach (SummaryReport sr in srList)
+            {
+                if (sr.SummaryReportPath != null)
+                {
+                    completedSummaryReports.Add(sr);
+                }
+            }
+
+            List<ManagerSummaryReportsViewModel> viewModelList = new List<ManagerSummaryReportsViewModel>();
+
+            foreach (SummaryReport sr in completedSummaryReports)
+            {
+                ManagerSummaryReportsViewModel viewModel = new ManagerSummaryReportsViewModel();
+                viewModel.WorkOrderID = db.WorkOrders.Find(sr.WorkOrderID).WorkOrderID;
+                viewModel.LTNumber = db.Compounds.Find(db.WorkOrders.Find(sr.WorkOrderID).LTNumber).LTNumber;
+                viewModel.CompoundName = db.Compounds.Find(db.WorkOrders.Find(sr.WorkOrderID).LTNumber).CompoundName;
+                viewModel.CustFirstName = db.Customers.Find(db.WorkOrders.Find(sr.WorkOrderID).CustID).CustFirstName;
+                viewModel.CustLastName = db.Customers.Find(db.WorkOrders.Find(sr.WorkOrderID).CustID).CustLastName;
+                viewModel.CustCompany = db.Customers.Find(db.WorkOrders.Find(sr.WorkOrderID).CustID).CustCompany;
+                viewModel.SummaryReportPath = sr.SummaryReportPath;
+                viewModelList.Add(viewModel);
+            }
+
+            return View(viewModelList);
         }
     }
 }

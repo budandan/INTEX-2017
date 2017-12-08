@@ -43,6 +43,10 @@ namespace Intex_2017.Controllers
             {
                 return RedirectToAction("Manager", "Dashboard");
             }
+            else if (User.IsInRole("Customer"))
+            {
+                return RedirectToAction("Customer", "Dashboard");
+            }
             return View();
         }
 
@@ -89,7 +93,7 @@ namespace Intex_2017.Controllers
         public ActionResult LabTech()
         {
             db.con.Open();
-            string query = "SELECT COUNT(*) FROM Assay WHERE StartDate IS NULL";
+            string query = "SELECT COUNT(*) FROM Assay INNER JOIN WorkOrder ON Assay.WorkOrderID = WorkOrder.WorkOrderID WHERE Assay.StartDate IS NULL AND WorkOrder.IsConfirmed = 1";
             using (var cmd = new SqlCommand(query, db.con))
             {
                 int rowsAmount = (int)cmd.ExecuteScalar(); // get the value of the count
@@ -129,7 +133,7 @@ namespace Intex_2017.Controllers
                 ViewBag.NoOfDataReports = rowsAmount;
             }
 
-            string query2 = "SELECT COUNT(A.WorkOrderID) FROM(SELECT DISTINCT Assay.WorkOrderID FROM WorkOrder INNER JOIN Assay ON WorkOrder.WorkOrderID = Assay.WorkOrderID INNER JOIN DataReport ON Assay.AssayID = DataReport.AssayID WHERE Assay.WorkOrderID NOT IN(SELECT Assay.WorkOrderID FROM Assay INNER JOIN DataReport ON Assay.AssayID = DataReport.AssayID WHERE DataReport.DataReportPath IS NULL)) A";
+            string query2 = "SELECT COUNT(*) FROM SummaryReport WHERE SummaryReportPath IS NULL";
             using (var cmd = new SqlCommand(query2, db.con))
             {
                 int rowsAmount = (int)cmd.ExecuteScalar(); // get the value of the count

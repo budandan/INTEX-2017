@@ -7,13 +7,13 @@
     <h1>Welcome, @Request.Cookies["firstname"].Value @Request.Cookies["lastname"].Value.</h1>
 </div>
 
-<div class="row animated fadeInDown">
+<div class="row animated fadeInLeft">
     <h2>My Dashboard</h2>
 </div>
 
-<div class="row animated fadeInDown">
-    <div class="row text-center">
-        <h2>How can we help you?</h2>
+<div class="row animated fadeInRight">
+    <div class="row text-center text-info">
+        <h3><i>How can we help you?</i></h3>
     </div>
 </div>
 <br />
@@ -37,7 +37,7 @@
                 <h3 class="panel-title text-center">See Your Work Orders</h3>
             </div>
             <div class="panel-body">
-                <p>See the status and results of your assay orders here.</p>
+                <p>See the status and results of your assay orders here. You will also pay invoices through this portal.</p>
                 <br />
                 <br />
                 @Html.ActionLink("See My Orders", "CustomerViewIndex", "WorkOrders", new { id = User.Identity.Name }, new { @class = "btn btn-primary" })
@@ -51,6 +51,8 @@
             </div>
             <div class="panel-body">
                 <p>Maybe you or your company has moved; either way, you can change your profile's information here.</p>
+                <br />
+                <br />
                 @Html.ActionLink("Update Information", "Edit", "Customers", new { id = User.Identity.Name }, new { @class = "btn btn-primary" })
             </div>
         </div>

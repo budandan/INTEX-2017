@@ -158,7 +158,36 @@ namespace Intex_2017.Controllers
         [Authorize(Roles = "SysAdmin, Manager")]
         public ActionResult ManagerView()
         {
-            return View();
+            List<DataReport> drList = new List<DataReport>();
+            drList = db.DataReports.ToList();
+
+            List<DataReport> completedDataReports = new List<DataReport>();
+            
+            foreach (DataReport dr in drList)
+            {
+                if (dr.DataReportPath != null)
+                {
+                    completedDataReports.Add(dr);
+                }
+            }
+
+            List<ManagerDataReportsViewModel> viewModelList = new List<ManagerDataReportsViewModel>();
+
+            foreach (DataReport dr in completedDataReports)
+            {
+                ManagerDataReportsViewModel viewModel = new ManagerDataReportsViewModel();
+                viewModel.WorkOrderID = db.WorkOrders.Find(db.Assays.Find(dr.AssayID).WorkOrderID).WorkOrderID;
+                viewModel.AssayID = db.Assays.Find(dr.AssayID).AssayID;
+                viewModel.LTNumber = db.Compounds.Find(db.Assays.Find(dr.AssayID).LTNumber).LTNumber;
+                viewModel.CompoundName = db.Compounds.Find(db.Assays.Find(dr.AssayID).LTNumber).CompoundName;
+                viewModel.CustFirstName = db.Customers.Find(db.WorkOrders.Find(db.Assays.Find(dr.AssayID).WorkOrderID).CustID).CustFirstName;
+                viewModel.CustLastName = db.Customers.Find(db.WorkOrders.Find(db.Assays.Find(dr.AssayID).WorkOrderID).CustID).CustLastName;
+                viewModel.CustCompany = db.Customers.Find(db.WorkOrders.Find(db.Assays.Find(dr.AssayID).WorkOrderID).CustID).CustCompany;
+                viewModel.DataReportPath = dr.DataReportPath;
+                viewModelList.Add(viewModel);
+            }
+
+            return View(viewModelList);
         }
     }
 }

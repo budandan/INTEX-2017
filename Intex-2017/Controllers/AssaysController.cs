@@ -23,8 +23,11 @@ namespace Intex_2017.Controllers
         {
             List<Assay> assayList = new List<Assay>();
             assayList = db.Assays.ToList();
-
             List<Assay> assaysNoStartDate = new List<Assay>();
+
+            List<WorkOrder> woList = new List<WorkOrder>();
+            woList = db.WorkOrders.ToList();
+            List<WorkOrder> woConfirmed = new List<WorkOrder>();
 
             foreach (Assay a in assayList)
             {
@@ -34,9 +37,30 @@ namespace Intex_2017.Controllers
                 }
             }
 
-            List<LabTechScheduleAssaysViewModel> viewModelList = new List<LabTechScheduleAssaysViewModel>();
+            foreach (WorkOrder wo in woList)
+            {
+                if (wo.IsConfirmed == true)
+                {
+                    woConfirmed.Add(wo);
+                }
+            }
+
+            List<Assay> ReceivedUnscheduledAssays = new List<Assay>();
 
             foreach (Assay a in assaysNoStartDate)
+            {
+                foreach (WorkOrder wo in woConfirmed)
+                {
+                    if (a.WorkOrderID == wo.WorkOrderID)
+                    {
+                        ReceivedUnscheduledAssays.Add(a);
+                    }
+                }
+            }
+
+            List<LabTechScheduleAssaysViewModel> viewModelList = new List<LabTechScheduleAssaysViewModel>();
+
+            foreach (Assay a in ReceivedUnscheduledAssays)
             {
                 LabTechScheduleAssaysViewModel viewModel = new LabTechScheduleAssaysViewModel();
                 viewModel.AssayID = a.AssayID;
@@ -230,7 +254,7 @@ namespace Intex_2017.Controllers
                 {
                     if (Path.GetExtension(UploadedFile.FileName) == ".txt")
                     {
-                        string fileName = TestTubeNumber + "-" + "AssayNo_" + AssayID + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ffff") + ".txt";
+                        string fileName = TestTubeNumber + "-" + "AssayNo_" + AssayID + "-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ffff") + ".txt";
                         string folderPath = Path.Combine(Server.MapPath("~/UploadedFiles/txt"), fileName);
 
                         // save path to server

@@ -128,15 +128,49 @@ namespace Intex_2017.Controllers
             i.IsPaid = true;
             db.Entry(i).State = EntityState.Modified;
             db.SaveChanges();
-
             ViewBag.WorkOrderID = WorkOrderID;
             return View();
+        }
+
+        [Authorize(Roles = "Customer, SysAdmin, Manager")]
+        public ActionResult GetInvoicePDF(int? InvoiceID)
+        {
+            Invoice i = db.Invoices.Find(InvoiceID);
+            return File(i.InvoicePath, "application/pdf");
         }
 
         [Authorize(Roles = "SysAdmin, Manager")]
         public ActionResult ManagerView()
         {
-            return View();
+            List<Invoice> invoiceList = new List<Invoice>();
+            invoiceList = db.Invoices.ToList();
+
+            List<Invoice> paidInvoices = new List<Invoice>();
+
+            foreach (Invoice i in invoiceList)
+            {
+                if (i.InvoicePath != null && i.IsPaid == true)
+                {
+                    paidInvoices.Add(i);
+                }
+            }
+
+            List<ManagerInvoicesViewModel> viewModelList = new List<ManagerInvoicesViewModel>();
+
+            foreach (Invoice i in paidInvoices)
+            {
+                ManagerInvoicesViewModel viewModel = new ManagerInvoicesViewModel();
+                viewModel.WorkOrderID = db.WorkOrders.Find(i.WorkOrderID).WorkOrderID;
+                viewModel.LTNumber = db.Compounds.Find(db.WorkOrders.Find(i.WorkOrderID).LTNumber).LTNumber;
+                viewModel.CompoundName = db.Compounds.Find(db.WorkOrders.Find(i.WorkOrderID).LTNumber).CompoundName;
+                viewModel.CustFirstName = db.Customers.Find(db.WorkOrders.Find(i.WorkOrderID).CustID).CustFirstName;
+                viewModel.CustLastName = db.Customers.Find(db.WorkOrders.Find(i.WorkOrderID).CustID).CustLastName;
+                viewModel.CustCompany = db.Customers.Find(db.WorkOrders.Find(i.WorkOrderID).CustID).CustCompany;
+                viewModel.InvoiceID = i.InvoiceID;
+                viewModelList.Add(viewModel);
+            }
+
+            return View(viewModelList);
         }
     }
 }

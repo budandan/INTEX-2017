@@ -9,15 +9,16 @@
 <div class="row animated fadeInDown">
     <h2>Manager Dashboard</h2>
 </div>
+<br />
+<br />
 <div class="row animated fadeInUp">
     <div class="col-md-4 text-center">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title text-center">See All Finished Data Reports</h3>
+                <h3 class="panel-title text-center">Finished Data Reports</h3>
             </div>
             <div class="panel-body">
-                <p>See all finished Data Reports for all Assays.</p>
-                <br />
+                <p>See all finished Data Reports for all Assays.</p><br />
                 @Html.ActionLink("See Finished Data Reports", "ManagerView", "DataReports", null, new { @class = "btn btn-primary" })
             </div>
         </div>
@@ -25,12 +26,10 @@
     <div class="col-md-4 text-center">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title text-center">See All Finished Summary Reports</h3>
+                <h3 class="panel-title text-center">Finished Summary Reports</h3>
             </div>
             <div class="panel-body">
-                <p>See all finished Summary Reports for all work order.</p>
-                <br />
-                <br />
+                <p>See all finished Summary Reports for all work orders.</p>
                 @Html.ActionLink("See Finished Summary Reports", "ManagerView", "SummaryReports", null, new { @class = "btn btn-primary" })
             </div>
         </div>
@@ -38,10 +37,10 @@
     <div class="col-md-4 text-center">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title text-center">See All Paid Invoices</h3>
+                <h3 class="panel-title text-center">Paid Invoices</h3>
             </div>
             <div class="panel-body">
-                <p>See all paid invoices for all work orders.</p>
+                <p>See all paid invoices for all work orders.</p><br />
                 @Html.ActionLink("See All Paid Invoices", "ManagerView", "Invoices", null, new { @class = "btn btn-primary" })
             </div>
         </div>
