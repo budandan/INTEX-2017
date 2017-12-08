@@ -68,6 +68,7 @@ namespace Intex_2017.Controllers
             viewModel.CallTicketID = ct.CallTicketID;
             viewModel.Body = ct.Body;
             ViewBag.CustID = ct.CustID;
+            viewModel.CustPhone = c.CustPhone;
             if (ct == null)
             {
                 return HttpNotFound();

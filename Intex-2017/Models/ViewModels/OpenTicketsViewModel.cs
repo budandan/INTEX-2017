@@ -13,5 +13,6 @@ namespace Intex_2017.Models.ViewModels
         public String CustCompany { get; set; }
         public String Subject { get; set; }
         public String Body { get; set; }
+        public String CustPhone { get; set; }
     }
 }
