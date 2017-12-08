@@ -144,7 +144,7 @@ namespace Intex_2017.Controllers
                 { "Billing", "Billing Agent" },
                 { "Reports", "Reporting Agent" },
                 { "TechDirector", "Technology Director" },
-                { "Management", "Management and Marketing" }
+                { "Manager", "Management and Marketing" }
             };
             return roleOptions;
         }

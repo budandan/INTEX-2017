@@ -311,6 +311,10 @@
     <Content Include="Views\Invoices\FileUploadSuccess.cshtml" />
     <Content Include="Views\Invoices\CustomerPayInvoice.cshtml" />
     <Content Include="Views\Invoices\PaymentSuccess.cshtml" />
+    <Content Include="Views\Dashboard\Manager.cshtml" />
+    <Content Include="Views\Invoices\ManagerView.cshtml" />
+    <Content Include="Views\SummaryReports\ManagerView.cshtml" />
+    <Content Include="Views\DataReports\ManagerView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

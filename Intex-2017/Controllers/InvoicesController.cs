@@ -132,5 +132,11 @@ namespace Intex_2017.Controllers
             ViewBag.WorkOrderID = WorkOrderID;
             return View();
         }
+
+        [Authorize(Roles = "SysAdmin, Manager")]
+        public ActionResult ManagerView()
+        {
+            return View();
+        }
     }
 }

@@ -153,5 +153,11 @@ namespace Intex_2017.Controllers
         {
             return File(DataReportPath, "application/pdf");
         }
+
+        [Authorize(Roles = "SysAdmin, Manager")]
+        public ActionResult ManagerView()
+        {
+            return View();
+        }
     }
 }
