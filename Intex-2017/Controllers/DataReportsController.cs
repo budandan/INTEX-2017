@@ -75,7 +75,7 @@ namespace Intex_2017.Controllers
                     {
                         DataReport dr = db.DataReports.Find(DataReportID);
                         int? AssayNumber = dr.AssayID;
-                        string fileName = "DataReport_Assay" + AssayNumber + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ffff") + ".pdf";
+                        string fileName = "DataReport_Assay" + AssayNumber + "-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ffff") + ".pdf";
                         string folderPath = Path.Combine(Server.MapPath("~/UploadedFiles/DataReports"), fileName);
 
                         // save path to server
@@ -100,11 +100,12 @@ namespace Intex_2017.Controllers
             return View(DataReportID);
         }
 
-        [Authorize(Roles = "SysAdmin, Reports, TechDirectory")]
+        [Authorize(Roles = "SysAdmin, Reports, TechDirector")]
         public ActionResult FileUploadSuccess(int? AssayID)
         {
             List<WorkOrder> woList = new List<WorkOrder>();
             List<Assay> assayList = new List<Assay>();
+            assayList = db.Assays.ToList();
             List<DataReport> drList = new List<DataReport>();
 
             Assay a = db.Assays.Find(AssayID);

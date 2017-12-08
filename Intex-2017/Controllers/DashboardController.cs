@@ -17,7 +17,7 @@ namespace Intex_2017.Controllers
         {
             if (User.IsInRole("SysAdmin"))
             {
-                return RedirectToAction("SysAdmin", "Dashboard");
+                return RedirectToAction("SysAdmin", "ControlPanels");
             }
             else if (User.IsInRole("LabTech"))
             {
