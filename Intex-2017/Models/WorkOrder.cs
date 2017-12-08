@@ -37,5 +37,6 @@ namespace Intex_2017.Models
         public bool? NeedsConditional { get; set; }
         public bool? IsCompleted { get; set; }
         public bool? IsClosed { get; set; }
+        public DateTime? DateCompleted { get; set; }
     }
 }

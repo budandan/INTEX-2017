@@ -1,20 +1,20 @@
 ﻿@{
-    ViewBag.Title = "UploadSummaryReport";
+    ViewBag.Title = "UploadInvoice";
 }
 <br />
 <div class="row text-center animated fadeInDown">
-    <h3>Submit Summary Report for WorkORrder No. @ViewBag.WorkOrderID</h3>
+    <h3>Submit Invoice for Work Order No. @ViewBag.WorkOrderID</h3>
 </div>
 <br />
 <br />
 <div class="row animated fadeInDown">
     <div class="col-md-5">
-        @using (Html.BeginForm("UploadReport", "SummaryReports", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("UploadInvoice", "Invoices", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-            <p>Summary Report File:</p>
+            <p>Invoice File:</p>
             @Html.TextBox("UploadedFile", null, new { type = "file" })
             <br />
-            @Html.Hidden("SummaryReportID", (int)ViewBag.SummaryReportID)
+            @Html.Hidden("InvoiceID", (int)ViewBag.InvoiceID)
 
             <input type="submit" class="btn btn-success" name="fileName" value="Upload" />
             <span>@ViewBag.Message</span>

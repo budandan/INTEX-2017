@@ -52,6 +52,29 @@
             <td>
                 @Html.ActionLink("See Assays", "CustomerViewAssays", new { id = item.WorkOrderID, compound = item.CompoundName }, new { @class = "btn btn-primary" })
             </td>
+            @{
+                if (item.HasInvoice)
+                {
+                    if (item.InvoicePaid)
+                    {
+                        <td>
+                            <button class="btn btn-success disabled">Invoice Paid</button>
+                        </td>
+                    }
+                    else if (!item.InvoicePaid)
+                    {
+                        <td>
+                            @Html.ActionLink("Pay Invoice", "CustomerPayInvoice", "Invoices", new { InvoiceID = item.InvoiceID }, new { @class = "btn btn-info" })
+                        </td>
+                    }
+                }
+                else if (!item.HasInvoice)
+                {
+                    <td>
+                        <button class="btn btn-default disabled">Invoice Not Available</button>
+                    </td>
+                }
+            }
         </tr>
     }
 

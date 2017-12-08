@@ -74,7 +74,7 @@ namespace Intex_2017.Controllers
                     {
                         SummaryReport sr = db.SummaryReports.Find(SummaryReportID);
                         int? WorkOrderID = sr.WorkOrderID;
-                        string fileName = "SummaryReport_WorkOrder" + WorkOrderID + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ffff") + ".txt";
+                        string fileName = "SummaryReport_WorkOrder" + WorkOrderID + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ffff") + ".pdf";
                         string folderPath = Path.Combine(Server.MapPath("~/UploadedFiles/DataReports"), fileName);
 
                         // save path to server
@@ -97,6 +97,29 @@ namespace Intex_2017.Controllers
                 ViewBag.Message = "File not selected.";
             }
             return View(SummaryReportID);
+        }
+
+        [Authorize(Roles = "SysAdmin, TechDirector")]
+        public ActionResult FileUploadSuccess(int? WorkOrderID)
+        {
+            // fire off flag for invoice
+            WorkOrder wo = db.WorkOrders.Find(WorkOrderID);
+            wo.IsCompleted = true;
+            db.Entry(wo).State = EntityState.Modified;
+            db.SaveChanges();
+
+            Invoice i = new Invoice();
+            i.WorkOrderID = wo.WorkOrderID;
+            db.Invoices.Add(i);
+            db.SaveChanges();
+
+            return View();
+        }
+
+        [Authorize(Roles = "Customer, SysAdmin, Manager")]
+        public ActionResult GetSummaryReportPDF(String SummaryReportPath)
+        {
+            return File(SummaryReportPath, "application/pdf");
         }
     }
 }

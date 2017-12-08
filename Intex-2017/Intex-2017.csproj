@@ -157,6 +157,7 @@
     <Compile Include="Controllers\DataReportsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoicesController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\SummaryReportsController.cs" />
@@ -171,11 +172,13 @@
     <Compile Include="Models\Compound.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\DataReport.cs" />
+    <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\PaymentMethod.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\SampleTest.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\SummaryReport.cs" />
+    <Compile Include="Models\ViewModels\BillingInvoiceIndexViewModel.cs" />
     <Compile Include="Models\ViewModels\CustomerSeeWorkOrdersViewModel.cs" />
     <Compile Include="Models\ViewModels\CustomerViewAssaysViewModel.cs" />
     <Compile Include="Models\ViewModels\EmployeeRole.cs" />
@@ -303,10 +306,17 @@
     <Content Include="Views\SummaryReports\SummaryReportIndex.cshtml" />
     <Content Include="Views\SummaryReports\UploadReport.cshtml" />
     <Content Include="Views\SummaryReports\FileUploadSuccess.cshtml" />
+    <Content Include="Views\Invoices\CreateInvoiceIndex.cshtml" />
+    <Content Include="Views\Invoices\UploadInvoice.cshtml" />
+    <Content Include="Views\Invoices\FileUploadSuccess.cshtml" />
+    <Content Include="Views\Invoices\CustomerPayInvoice.cshtml" />
+    <Content Include="Views\Invoices\PaymentSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="UploadedFiles\DataReports\" />
+    <Folder Include="UploadedFiles\Invoices\" />
+    <Folder Include="UploadedFiles\SummaryReports\" />
     <Folder Include="UploadedFiles\txt\" />
   </ItemGroup>
   <ItemGroup>

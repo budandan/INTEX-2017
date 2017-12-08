@@ -282,6 +282,32 @@ namespace Intex_2017.Controllers
                     viewModel.DateDue = wo.DateDue;
                     viewModel.CompoundName = db.Compounds.Find(wo.LTNumber).CompoundName;
                     viewModel.IsVerified = wo.IsVerified;
+                    var i = db.Invoices.Where(x => x.WorkOrderID == wo.WorkOrderID).FirstOrDefault();
+                    if (i != null)
+                    {
+                        if (i.InvoicePath != null)
+                        {
+                            viewModel.HasInvoice = true;
+                            viewModel.InvoicePath = i.InvoicePath;
+                            viewModel.InvoiceID = i.InvoiceID;
+                            if (i.IsPaid == true)
+                            {
+                                viewModel.InvoicePaid = true;
+                            }
+                            else
+                            {
+                                viewModel.InvoicePaid = false;
+                            }
+                        }
+                        else
+                        {
+                            viewModel.HasInvoice = false;
+                        }
+                    }
+                    else
+                    {
+                        viewModel.HasInvoice = false;
+                    }
                     viewModelList.Add(viewModel);
                 }
             }
@@ -293,6 +319,7 @@ namespace Intex_2017.Controllers
             List<Assay> assayList = new List<Assay>();
             assayList = db.Assays.ToList();
             ViewBag.HasASummary = false;
+            ViewBag.SummmaryReportPath = null;
             List<CustomerViewAssaysViewModel> viewModelList = new List<CustomerViewAssaysViewModel>();
             foreach (Assay a in assayList)
             {
@@ -311,6 +338,7 @@ namespace Intex_2017.Controllers
                     {
                         viewModel.SummaryReportPath = summaryReport.SummaryReportPath;
                         ViewBag.HasASummary = true;
+                        ViewBag.SummaryReportPath = summaryReport.SummaryReportPath;
                     }
                     viewModelList.Add(viewModel);
                 }

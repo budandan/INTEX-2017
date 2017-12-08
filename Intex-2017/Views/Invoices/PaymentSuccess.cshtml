@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "PaymentSuccess";
+}
+<br />
+<div class="row animated fadeInDown">
+    <h2 class="text-success">Payment for Work Order No. @ViewBag.WorkOrderID was a success.</h2>
+    <h3 class="text-default">You may now return to your dashboard.</h3>
+    <br />
+    <br />
+    @Html.ActionLink("Return To Dashboard", "Index", "Dashboard", null, new { @class = "btn btn-default" })
+</div>

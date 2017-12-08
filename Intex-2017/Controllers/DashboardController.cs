@@ -62,6 +62,12 @@ namespace Intex_2017.Controllers
                 int rowsAmount = (int)cmd.ExecuteScalar(); // get the value of the count
                 ViewBag.NoOfPendingWorkOrders = rowsAmount;
             }
+            string query2 = "SELECT COUNT(*) FROM Invoice WHERE WorkOrderID IS NOT NULL AND InvoicePath IS NULL";
+            using (var cmd = new SqlCommand(query2, db.con))
+            {
+                int rowsAmount = (int)cmd.ExecuteScalar(); // get the value of the count
+                ViewBag.NoOfWorkOrdersNeedingInvoices = rowsAmount;
+            }
             return View();
         }
 

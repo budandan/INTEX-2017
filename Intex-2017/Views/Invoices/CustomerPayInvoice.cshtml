@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "CustomerPayInvoice";
+}
+<br />
+<br />
+<div class="row text-center animated fadeInDown">
+    <h2>Pay Invoice for Work Order No. @ViewBag.WorkOrderID</h2>
+</div>
+
+<div class="row animated fadeInDown">
+    <img src="~/Content/intex-payment-mockup.jpg" alt="Alternate Text" />
+</div>
+<br />
+<br />
+@Html.ActionLink("Pay Now", "PaymentSuccess", "Invoices", new { WorkOrderID = ViewBag.WorkOrderID, InvoiceID = ViewBag.InvoiceID}, new { @class = "btn btn-primary"})

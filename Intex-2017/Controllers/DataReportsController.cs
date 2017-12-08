@@ -75,7 +75,7 @@ namespace Intex_2017.Controllers
                     {
                         DataReport dr = db.DataReports.Find(DataReportID);
                         int? AssayNumber = dr.AssayID;
-                        string fileName = "DataReport_Assay" + AssayNumber + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ffff") + ".txt";
+                        string fileName = "DataReport_Assay" + AssayNumber + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ffff") + ".pdf";
                         string folderPath = Path.Combine(Server.MapPath("~/UploadedFiles/DataReports"), fileName);
 
                         // save path to server
@@ -146,6 +146,12 @@ namespace Intex_2017.Controllers
 
             ViewBag.AssayID = AssayID;
             return View();
+        }
+
+        [Authorize(Roles = "Customer, SysAdmin, Manager")]
+        public ActionResult GetDataReportPDF(String DataReportPath)
+        {
+            return File(DataReportPath, "application/pdf");
         }
     }
 }

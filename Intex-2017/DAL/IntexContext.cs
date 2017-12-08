@@ -23,6 +23,7 @@ namespace Intex_2017.DAL
         public DbSet<DataReport> DataReports { get; set; }
         public DbSet<SummaryReport> SummaryReports { get; set; }
         public DbSet<SampleTest> SampleTests { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
 
 
         public SqlConnection con = new SqlConnection("Data Source=DESKTOP-89404G6\\SQLEXPRESS;Initial Catalog=Intex;Integrated Security=True");

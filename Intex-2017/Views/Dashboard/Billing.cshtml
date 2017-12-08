@@ -27,6 +27,7 @@
                 <h3 class="text-center">
                     pending work order(s) that require(s) verification.
                 </h3>
+                <br />
                 @Html.ActionLink("See Pending Work Orders", "VerifyCreditIndex", "WorkOrders", null, new { @class = "btn btn-primary" })
             </div>
         </div>
@@ -34,16 +35,18 @@
     <div class="col-md-4 text-center animated fadeInUp">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title text-center">Create Invoice</h3>
+                <h3 class="panel-title text-center">Create Invoice For Completed Work Orders</h3>
             </div>
             <div class="panel-body">
                 <h3 class="text-center">
-                    Create Invoices for work orders that dont have invoices yet. //TODO
+                    There are
+                </h3>
+                <h1 class="text-danger">@ViewBag.NoOfWorkOrdersNeedingInvoices</h1>
+                <h3 class="text-center">
+                    completed work order(s) that require(s) invoices.
                 </h3>
                 <br />
-                <br />
-                <br />
-                @Html.ActionLink("Create Work Order", "SetCompound", "WorkOrders", new { SalesAgentName = User.Identity.Name }, new { @class = "btn btn-success" })
+                @Html.ActionLink("Create Invoice", "CreateInvoiceIndex", "Invoices", null, new { @class = "btn btn-primary" })
             </div>
         </div>
     </div>

@@ -46,7 +46,7 @@
                 else
                 {
                     <td>
-                        @Html.ActionLink("View", "GetDataReportPDF", "SummaryReports", null, new { @class = "btn btn-primary"})
+                        @Html.ActionLink("View", "GetDataReportPDF", "DataReports", new { DataReportPath = item.DataReportPath}, new { @class = "btn btn-primary"})
                     </td>
                 }
             }
@@ -61,7 +61,7 @@
         }
         else
         {
-            @Html.ActionLink("View Summary Report", "GetSummaryReportPDF", "SummaryReports", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("View Summary Report", "GetSummaryReportPDF", "SummaryReports", new { SummaryReportPath = ViewBag.SummaryReportPath}, new { @class = "btn btn-primary" })
         }
     }
 </div>
