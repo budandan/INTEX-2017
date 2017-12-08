@@ -75,7 +75,7 @@ namespace Intex_2017.Controllers
                         SummaryReport sr = db.SummaryReports.Find(SummaryReportID);
                         int? WorkOrderID = sr.WorkOrderID;
                         string fileName = "SummaryReport_WorkOrder" + WorkOrderID + "-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ffff") + ".pdf";
-                        string folderPath = Path.Combine(Server.MapPath("~/UploadedFiles/DataReports"), fileName);
+                        string folderPath = Path.Combine(Server.MapPath("~/UploadedFiles/SummaryReports"), fileName);
 
                         // save path to server
                         sr.SummaryReportPath = folderPath;
