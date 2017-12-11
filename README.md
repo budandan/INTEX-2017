@@ -9,27 +9,28 @@ Employee Roles
    Username: admin
    Password: password
 
-Sales Representative
+
+#### Sales Representative
    Username: salesrep
    Password: password
 
-Lab Technician 
+#### Lab Technician 
    Username: labtech
    Password: password
    
-Billing Agent
+#### Billing Agent
    Username: billingagent
    Password: password
    
-Technical Director of Pharmacology
+#### Technical Director of Pharmacology
    Username:  tdp
    Password: password
    
-Reporting Agent
+#### Reporting Agent
    Username: reports
    Password: password
    
-Manager
+#### Manager
    Username: manager
    Password: password
    
