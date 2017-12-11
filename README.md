@@ -33,7 +33,7 @@ Manager
    Username: manager
    Password: password
    
-
+---------------------------
 1. Create Customer Account using customer portal -> register
 2. Create your contact us form
 3. Follow your order through the workflows:
